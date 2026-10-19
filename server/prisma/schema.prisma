@@ -1,0 +1,171 @@
+// prisma/schema.prisma — Nexus CRM Database Schema
+// ─────────────────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ── Users ─────────────────────────────────────────────────────
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String
+  role         String   @default("user")
+  avatar       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  createdLeads   Lead[]   @relation("LeadCreatedBy")
+  createdDeals   Deal[]   @relation("DealCreatedBy")
+  activities     Activity[]
+  notifications  Notification[]
+}
+
+// ── Contacts ──────────────────────────────────────────────────
+model Contact {
+  id           Int      @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  email        String   @unique
+  phone        String?
+  company      String?
+  jobTitle     String?
+  location     String?
+  leadSource   String   @default("manual")
+  lifecycleStage String @default("lead")
+  notes        String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  lastActivityAt DateTime @default(now())
+
+  leads     Lead[]
+  deals     Deal[]
+  activities Activity[]
+}
+
+// ── Leads ─────────────────────────────────────────────────────
+model Lead {
+  id              Int      @id @default(autoincrement())
+  leadNumber      String   @unique
+  status          String   @default("new")   // new | attempting | connected | qualified | disqualified | converted
+  type            String   @default("mql")    // mql | sql | deal
+  source          String   @default("manual") // google_ads | meta_ads | website | inbound_call | referral | manual
+  company         String?
+  companySize     String?
+  industry        String?
+  website         String?
+  notes           String?
+  qualificationNotes String?
+  nextFollowUp    DateTime?
+  expectedValue   Float?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  contactId       Int?
+  contact         Contact?    @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  createdById     Int
+  createdBy       User     @relation("LeadCreatedBy", fields: [createdById], references: [id])
+  activities      Activity[]
+  deals           Deal[]
+}
+
+// ── Pipelines ─────────────────────────────────────────────────
+model Pipeline {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  stages Stage[]
+  deals  Deal[]
+}
+
+// ── Pipeline Stages ───────────────────────────────────────────
+model Stage {
+  id          Int      @id @default(autoincrement())
+  name        String
+  position    Int      @default(0)
+  color       String   @default("#6366f1")
+  isClosedWon  Boolean @default(false)
+  isClosedLost Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  pipelineId  Int
+  pipeline    Pipeline @relation(fields: [pipelineId], references: [id], onDelete: Cascade)
+
+  deals Deal[]
+}
+
+// ── Deals ─────────────────────────────────────────────────────
+model Deal {
+  id              Int      @id @default(autoincrement())
+  dealName        String
+  amount          Float    @default(0)
+  probability     Int      @default(50)  // 0-100
+  expectedCloseDate DateTime?
+  actualCloseDate DateTime?
+  status          String   @default("open") // open | won | lost
+  lostReason      String?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  contactId       Int
+  contact         Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  // The lead this deal originated from. Nullable because deals can also be
+  // created directly from the Deals page with no lead behind them. Unique so
+  // the database itself rejects a second deal for the same lead — this is what
+  // makes repeated qualification idempotent rather than merely guarded in code.
+  leadId          Int?     @unique
+  lead            Lead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  stageId         Int
+  stage           Stage    @relation(fields: [stageId], references: [id])
+  pipelineId      Int
+  pipeline        Pipeline @relation(fields: [pipelineId], references: [id])
+  createdById     Int
+  createdBy       User     @relation("DealCreatedBy", fields: [createdById], references: [id])
+
+  activities Activity[]
+}
+
+// ── Activities ────────────────────────────────────────────────
+model Activity {
+  id          Int      @id @default(autoincrement())
+  type        String                  // call | email | meeting | note | task
+  subject     String
+  description String?
+  dueDate     DateTime?
+  completed   Boolean  @default(false)
+  priority    String   @default("medium") // low | medium | high
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  contactId   Int?
+  contact     Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+  leadId      Int?
+  lead        Lead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  dealId      Int?
+  deal        Deal?    @relation(fields: [dealId], references: [id], onDelete: SetNull)
+  createdById Int
+  createdBy   User     @relation(fields: [createdById], references: [id])
+}
+
+// ── Notifications ─────────────────────────────────────────────
+model Notification {
+  id        Int      @id @default(autoincrement())
+  message   String
+  type      String   @default("info")  // info | success | warning | error
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}

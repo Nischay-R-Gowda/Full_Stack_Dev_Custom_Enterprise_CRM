@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nexus CRM — Complete Learning Guide</title>
+<style>
+  :root {
+    --ink: #1e293b;
+    --muted: #64748b;
+    --rule: #e2e8f0;
+    --accent: #4f46e5;
+    --code-bg: #f8fafc;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
+  h1, h2, h3, h4 { line-height: 1.25; font-weight: 650; }
+
+  /* Cover */
+  .cover {
+    page-break-after: always;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 3rem;
+  }
+  .cover .eyebrow { color: var(--accent); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; font-size: 9pt; }
+  .cover h1 { font-size: 34pt; margin: .5rem 0 0; letter-spacing: -.02em; }
+  .cover .sub { font-size: 14pt; color: var(--muted); margin-top: .75rem; font-weight: 400; }
+  .cover .rule { height: 3px; width: 64px; background: var(--accent); margin: 2rem 0; }
+  .cover .meta { margin-top: 2.5rem; font-size: 9.5pt; color: var(--muted); line-height: 1.9; }
+  .cover .meta strong { color: var(--ink); font-weight: 600; }
+
+  /* Table of contents */
+  .toc { page-break-after: always; }
+  .toc h2 { font-size: 20pt; margin: 0 0 1.5rem; }
+  .toc ol { list-style: none; padding: 0; margin: 0; }
+  .toc li { padding: .3rem 0; font-size: 10pt; }
+  .toc .part-heading { margin-top: 1.25rem; font-weight: 700; color: var(--accent); font-size: 9pt; letter-spacing: .08em; text-transform: uppercase; }
+
+  .chapter { page-break-before: always; }
+  .chapter-title { font-size: 21pt; margin: 0 0 1.25rem; padding-bottom: .6rem; border-bottom: 2px solid var(--rule); }
+  .part { page-break-before: always; }
+  .part-title { font-size: 11pt; color: var(--accent); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 1rem; }
+
+  h2 { font-size: 15pt; margin: 2rem 0 .75rem; }
+  h3 { font-size: 12pt; margin: 1.6rem 0 .5rem; }
+  h4 { font-size: 10.5pt; margin: 1.3rem 0 .4rem; color: #334155; }
+  p { margin: 0 0 .8rem; }
+  a { color: var(--accent); text-decoration: none; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 1.75rem 0; }
+
+  ul, ol { margin: 0 0 .9rem; padding-left: 1.4rem; }
+  li { margin: .25rem 0; }
+
+  code {
+    font-family: "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+    font-size: .87em;
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: .08em .3em;
+  }
+  pre.code {
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: .8rem .9rem;
+    overflow-x: auto;
+    font-size: 8.6pt;
+    line-height: 1.45;
+    margin: 0 0 1rem;
+    page-break-inside: avoid;
+  }
+  pre.code code { background: none; border: 0; padding: 0; font-size: 1em; white-space: pre; }
+
+  .table-wrap { margin: 0 0 1.1rem; page-break-inside: avoid; }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+  th, td { border: 1px solid var(--rule); padding: .38rem .55rem; text-align: left; vertical-align: top; }
+  th { background: #f1f5f9; font-weight: 650; }
+  tbody tr:nth-child(even) { background: #fafbfc; }
+
+  blockquote {
+    margin: 0 0 1rem;
+    padding: .6rem .9rem;
+    border-left: 3px solid var(--accent);
+    background: #f5f3ff;
+    color: #3730a3;
+  }
+
+  /* Print chrome */
+  @page {
+    size: A4;
+    margin: 20mm 16mm 18mm;
+    @bottom-center { content: counter(page); font-size: 8.5pt; color: #94a3b8; }
+    @top-right { content: "Nexus CRM — Complete Learning Guide"; font-size: 8pt; color: #cbd5e1; }
+  }
+  @page :first { @top-right { content: none; } @bottom-center { content: none; } }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="eyebrow">Full Stack Development</div>
+  <h1>Nexus CRM</h1>
+  <div class="sub">Complete Learning Guide and Implementation Reference</div>
+  <div class="rule"></div>
+  <div class="meta">
+    <div><strong>Scope:</strong> Semester MVP — a functional CRM from lead capture to closed revenue</div>
+    <div><strong>Stack:</strong> React 19 · Vite · Tailwind CSS v4 · Express · SQLite · Prisma</div>
+    <div><strong>Generated:</strong> 2026-10-14</div>
+    <div><strong>Sources:</strong> README.md and the 14 documents in <code>docs/</code></div>
+  </div>
+</div>
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li class="part-heading">Part I — Foundations</li><li>1. Project Master Overview</li><li>2. Requirements</li><li>3. Architecture</li><li class="part-heading">Part II — Data Layer</li><li>4. Database Guide</li><li>5. API Reference</li><li class="part-heading">Part III — Frontend</li><li>6. JavaScript Guide</li><li>7. React Guide</li><li>8. Frontend Guide</li><li class="part-heading">Part IV — Operations</li><li>9. Setup and Run</li><li>10. Testing Report</li><li>11. Known Limitations</li><li>12. Future Roadmap</li><li class="part-heading">Part V — Presentation</li><li>13. Final Presentation Outline</li><li>14. Viva Question Bank</li>
+  </ol>
+</nav>
+
+<section class="chapter"><h1 class="chapter-title">README</h1><p>A full-stack Customer Relationship Management web application built for a university semester project and designed to evolve into a production-grade CRM product.</p>
+<h2>Features</h2>
+<ul><li><strong>Dashboard</strong> — KPI cards, charts (Recharts), lead acquisition trends, revenue overview</li><li><strong>Contacts</strong> — Full CRUD, search, filter, lifecycle stages, duplicate email prevention</li><li><strong>Leads</strong> — Lead management with MQL/SQL/Deal status, qualification workflow, contact association</li><li><strong>Deals &amp; Pipeline</strong> — Kanban-style pipeline view, stage management, deal creation and tracking</li><li><strong>Pipelines</strong> — Create/edit pipelines, add/rename/reorder stages, safe deletion</li><li><strong>Lead Sources</strong> — Simulated Google Ads, Meta Ads, Website Form, and Inbound Call integrations</li><li><strong>Activities</strong> — Call, email, meeting, note, and task tracking with due dates</li><li><strong>Reports</strong> — Analytics charts with CSV export, live data from application database</li></ul>
+<h2>Tech Stack</h2>
+<div class="table-wrap"><table><thead><tr><th>Layer</th><th>Technology</th></tr></thead><tbody><tr><td>Frontend</td><td>React 19, Vite 8, Tailwind CSS 4, Recharts, Lucide React</td></tr><tr><td>Backend</td><td>Node.js, Express.js</td></tr><tr><td>Database</td><td>SQLite, Prisma ORM</td></tr><tr><td>State</td><td>React Hooks (useState, useEffect)</td></tr><tr><td>Routing</td><td>React Router DOM 7</td></tr></tbody></table></div>
+<h2>Quick Start</h2>
+<pre class="code lang-bash"><code>npm install
+
+echo "DATABASE_URL=\"file:./server/prisma/dev.db\"" &gt; .env
+npx prisma db push --schema server/prisma/schema.prisma
+node server/prisma/seed.js
+
+npm run server
+
+npm run dev</code></pre>
+<p>Visit <code>http://localhost:5173</code> to use the application.</p>
+<h2>Project Structure</h2>
+<pre class="code"><code>crm-platform/
+  src/
+    components/
+      common/       — NotFound page
+      dashboard/    — Dashboard with KPI cards and charts
+      contacts/     — Contacts CRUD with search/filter
+      leads/        — Leads management with qualification
+      deals/        — Kanban pipeline and deal CRUD
+      pipelines/    — Pipeline and stage management
+      sources/      — Simulated lead source integrations
+      activities/   — Activity and follow-up tracking
+      reports/      — Analytics and CSV export
+      ui/           — Reusable UI components (Button, Card, Badge, Modal, Input)
+      layout/       — AppShell, Sidebar, Header
+    services/       — API client (api.js)
+    utils/          — Constants and helpers
+    pages/          — (routed via AppShell)
+    App.jsx         — Route configuration
+    main.jsx        — Entry point with Router
+  server/
+    server.js       — Express app entry
+    routes/         — REST API route handlers
+    controllers/    — Business logic and Prisma operations
+    prisma/
+      schema.prisma — Database schema
+      seed.js       — Sample data
+    .env            — DATABASE_URL
+  docs/             — Documentation and learning guides</code></pre>
+<h2>Demo Walkthrough</h2>
+<ol><li>Open the Dashboard → see seeded KPIs and charts</li><li>Go to <strong>Lead Sources</strong> → click <strong>Simulate Google Ads Lead</strong> → see success toast</li><li>Go to <strong>Leads</strong> → find the new lead with MQL badge</li><li>Click the <strong>Qualify</strong> button → select SQL/Deal type, enter contact details</li><li>Go to <strong>Deals</strong> → create a deal for the lead → move through pipeline stages</li><li>Go to <strong>Dashboard</strong> → see updated metrics and charts</li></ol>
+<h2>Scripts</h2>
+<div class="table-wrap"><table><thead><tr><th>Command</th><th>Description</th></tr></thead><tbody><tr><td><code>npm run dev</code></td><td>Start Vite dev server</td></tr><tr><td><code>npm run server</code></td><td>Start Express backend</td></tr><tr><td><code>npm run dev:all</code></td><td>Start both concurrently</td></tr><tr><td><code>npm run build</code></td><td>Production build</td></tr><tr><td><code>npm run db:push</code></td><td>Push schema to database</td></tr><tr><td><code>npm run db:seed</code></td><td>Seed with sample data</td></tr><tr><td><code>npm run db:studio</code></td><td>Open Prisma Studio</td></tr><tr><td><code>npm run lint</code></td><td>Run ESLint</td></tr></tbody></table></div>
+<h2>Documentation</h2>
+<p>See <code>docs/</code> for:</p>
+<ul><li>Architecture, database schema, and API reference</li><li>Frontend and JavaScript learning guides</li><li>Testing report and known limitations</li><li>Viva question bank (100+ questions)</li><li>Complete learning guide with code explanations</li></ul>
+<h2>License</h2>
+<p>University semester project — Nexus CRM.</p></section>
+
+<section class="part"><h2 class="part-title">Part I — Foundations</h2></section>
+<section class="chapter"><h1 class="chapter-title">Project Master Overview</h1><h2>1. Project Overview</h2>
+<p><strong>Name:</strong> Nexus CRM <strong>Type:</strong> Full-stack CRM web application <strong>Purpose:</strong> Semester 1 project + personal mega project <strong>Timeline:</strong> ~14 days, 3-4 hours/day</p>
+<h2>2. Product Workflow</h2>
+<pre class="code"><code>Lead Sources → New Lead / MQL → Contact Association → Qualification → SQL
+    → Deal Creation → Sales Pipeline → Closed Won / Closed Lost
+    → Dashboard &amp; Analytics</code></pre>
+<h3>Lead Sources</h3>
+<ul><li>Google Ads (simulated)</li><li>Meta Ads (simulated)</li><li>Website Forms (simulated)</li><li>Inbound Calls (simulated)</li><li>Referrals (manual entry)</li><li>Manual Entry</li></ul>
+<h3>Lead Lifecycle</h3>
+<div class="table-wrap"><table><thead><tr><th>Status</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>New</td><td>MQL</td><td>Fresh lead, no contact yet</td></tr><tr><td>Attempting Contact</td><td>MQL</td><td>Trying to reach</td></tr><tr><td>Connected</td><td>MQL</td><td>Contact established</td></tr><tr><td>Qualified</td><td>SQL</td><td>Ready for sales</td></tr><tr><td>Converted</td><td>Deal</td><td>Became an opportunity</td></tr></tbody></table></div>
+<h2>3. Technology Stack</h2>
+<div class="table-wrap"><table><thead><tr><th>Layer</th><th>Technology</th><th>Version</th></tr></thead><tbody><tr><td>Frontend Framework</td><td>React</td><td>19.2.8</td></tr><tr><td>Build Tool</td><td>Vite</td><td>8.3.0</td></tr><tr><td>Styling</td><td>Tailwind CSS</td><td>4.3.3</td></tr><tr><td>Charts</td><td>Recharts</td><td>3.10.1</td></tr><tr><td>Icons</td><td>Lucide React</td><td>1.51.0</td></tr><tr><td>Routing</td><td>React Router DOM</td><td>7.18.4</td></tr><tr><td>Backend</td><td>Express.js</td><td>5.3.0</td></tr><tr><td>Database</td><td>SQLite + Prisma</td><td>6.8.0</td></tr><tr><td>Notifications</td><td>React Hot Toast</td><td>—</td></tr></tbody></table></div>
+<h2>4. Application Modules</h2>
+<h3>A. Application Shell</h3>
+<ul><li>Responsive sidebar with navigation</li><li>Top header with search, notifications, user profile</li><li>Breadcrumbs</li><li>React Router navigation</li><li>Collapsible sidebar</li></ul>
+<h3>B. Dashboard (8 KPI Cards + 4 Charts)</h3>
+<ul><li>Total Contacts, Total Leads, MQLs, SQLs</li><li>Open Deals, Open Pipeline Value, Closed Won Revenue, Conversion Rate</li><li>Lead Acquisition Over Time (Line Chart)</li><li>Leads by Source (Pie Chart)</li><li>Lead Status Distribution (Bar Chart)</li><li>Revenue Overview (Pipeline vs Won vs Lost)</li><li>Recent Leads, Recent Activities</li></ul>
+<h3>C. Contacts</h3>
+<ul><li>Full CRUD operations</li><li>Search, sort, lifecycle stage filter</li><li>Duplicate email prevention</li><li>Contact detail view with associated leads/deals/activities</li><li>Form validation</li></ul>
+<h3>D. Leads</h3>
+<ul><li>List with search, status/source/type filters</li><li>MQL/SQL/Deal type badges</li><li>Contact association (create or link existing)</li><li>Qualification workflow (MQL → SQL → Deal)</li><li>Status progression</li><li>Activity history</li></ul>
+<h3>E. Deals &amp; Pipeline</h3>
+<ul><li>Kanban board with pipeline stages</li><li>Move deals forward/backward between stages</li><li>Deal amount, probability, expected close date</li><li>Create/edit/delete deals</li><li>Pipeline selector filter</li><li>Stage totals and deal counts</li></ul>
+<h3>F. Customizable Pipelines</h3>
+<ul><li>Create/rename pipelines</li><li>Add/rename/delete stages</li><li>Configure stage colors</li><li>Mark stages as Closed Won/Closed Lost</li><li>Safe deletion (reassign deals first)</li></ul>
+<h3>G. Lead Sources</h3>
+<ul><li>4 simulated source cards (Google Ads, Meta Ads, Website Form, Inbound Call)</li><li>Each creates realistic records with contact association</li><li>Clear simulation labels</li><li>Success feedback with toast notifications</li></ul>
+<h3>H. Activities &amp; Follow-ups</h3>
+<ul><li>Create calls, emails, meetings, notes, tasks</li><li>Due dates and priority levels</li><li>Mark activities complete</li><li>Filter by type</li></ul>
+<h3>I. Reports</h3>
+<ul><li>Leads by source, status, over time</li><li>Deals by stage</li><li>Pipeline value</li><li>Won/lost distribution</li><li>CSV export</li></ul>
+<h2>5. Database Schema Summary</h2>
+<pre class="code"><code>User (id, email, name, role)
+  └─→ Lead (createdById)
+  └─→ Deal (createdById)
+  └─→ Activity (createdById)
+
+Contact (id, firstName, lastName, email, phone, company, jobTitle, location, leadSource, lifecycleStage, notes)
+  ├─→ Lead (contactId) — optional
+  ├─→ Deal (contactId)
+  └─→ Activity (contactId) — optional
+
+Lead (id, leadNumber, status, type, source, company, notes, qualificationNotes, contactId)
+  ├─→ Contact (contactId)
+  ├─→ Activity (leadId) — optional
+  └─→ User (createdById)
+
+Pipeline (id, name, description, isDefault)
+  └─→ Stage (pipelineId)
+  └─→ Deal (pipelineId)
+
+Stage (id, name, position, color, isClosedWon, isClosedLost)
+  └─→ Deal (stageId)
+
+Deal (id, dealName, amount, probability, expectedCloseDate, actualCloseDate, status, lostReason, notes)
+  ├─→ Contact (contactId)
+  ├─→ Stage (stageId)
+  ├─→ Pipeline (pipelineId)
+  ├─→ User (createdById)
+  └─→ Activity (dealId) — optional
+
+Activity (id, type, subject, description, dueDate, completed, priority)
+  ├─→ Contact (contactId) — optional
+  ├─→ Lead (leadId) — optional
+  ├─→ Deal (dealId) — optional
+  └─→ User (createdById)</code></pre>
+<h2>6. API Routes</h2>
+<h3>Contacts</h3>
+<ul><li><code>GET /api/contacts</code> — List with search/sort/filter</li><li><code>GET /api/contacts/:id</code> — Get one</li><li><code>POST /api/contacts</code> — Create</li><li><code>PUT /api/contacts/:id</code> — Update</li><li><code>DELETE /api/contacts/:id</code> — Delete</li></ul>
+<h3>Leads</h3>
+<ul><li><code>GET /api/leads</code> — List with filters</li><li><code>GET /api/leads/:id</code> — Get one</li><li><code>POST /api/leads</code> — Create</li><li><code>PUT /api/leads/:id</code> — Update</li><li><code>DELETE /api/leads/:id</code> — Delete</li><li><code>POST /api/leads/:id/qualify</code> — Qualify (MQL→SQL→Deal)</li><li><code>POST /api/leads/:id/convert</code> — Convert to deal</li></ul>
+<h3>Deals</h3>
+<ul><li><code>GET /api/deals</code> — List</li><li><code>GET /api/deals/:id</code> — Get one</li><li><code>POST /api/deals</code> — Create</li><li><code>PUT /api/deals/:id</code> — Update</li><li><code>DELETE /api/deals/:id</code> — Delete</li><li><code>PATCH /api/deals/:id/stage</code> — Move to stage</li></ul>
+<h3>Pipelines</h3>
+<ul><li><code>GET /api/pipelines</code> — List all</li><li><code>GET /api/pipelines/:id</code> — Get one</li><li><code>POST /api/pipelines</code> — Create</li><li><code>PUT /api/pipelines/:id</code> — Update</li><li><code>DELETE /api/pipelines/:id</code> — Delete</li><li><code>POST /api/pipelines/:id/stages</code> — Add stage</li><li><code>PUT /api/pipelines/stages/:id</code> — Update stage</li><li><code>DELETE /api/pipelines/stages/:id</code> — Delete stage</li></ul>
+<h3>Dashboard</h3>
+<ul><li><code>GET /api/dashboard</code> — All dashboard metrics</li></ul>
+<h3>Activities</h3>
+<ul><li><code>GET /api/activities</code> — List with filters</li><li><code>GET /api/activities/:id</code> — Get one</li><li><code>POST /api/activities</code> — Create</li><li><code>PUT /api/activities/:id</code> — Update</li><li><code>DELETE /api/activities/:id</code> — Delete</li></ul>
+<h3>Sources</h3>
+<ul><li><code>POST /api/sources/google-ads</code> — Simulate Google Ads lead</li><li><code>POST /api/sources/meta-ads</code> — Simulate Meta Ads lead</li><li><code>POST /api/sources/website-form</code> — Simulate website lead</li><li><code>POST /api/sources/inbound-call</code> — Simulate inbound call lead</li></ul>
+<h3>Reports</h3>
+<ul><li><code>GET /api/reports</code> — Aggregated analytics data</li></ul>
+<h3>Health</h3>
+<ul><li><code>GET /api/health</code> — Server health check</li></ul></section>
+<section class="chapter"><h1 class="chapter-title">Requirements</h1><h2>Functional Requirements</h2>
+<h3>FR-1: Dashboard</h3>
+<ul><li>Display 8 KPI cards with live data</li><li>Lead acquisition over time chart</li><li>Leads by source pie chart</li><li>Lead status distribution bar chart</li><li>Revenue overview (pipeline/won/lost)</li><li>Recent leads and activities lists</li></ul>
+<h3>FR-2: Contacts Management</h3>
+<ul><li>Create, read, update, delete contacts</li><li>Search by name, email, company</li><li>Filter by lifecycle stage</li><li>Sort by any field</li><li>Duplicate email prevention</li><li>Contact detail view</li><li>Associated leads, deals, and activities</li></ul>
+<h3>FR-3: Leads Management</h3>
+<ul><li>Create, read, update, delete leads</li><li>Search by lead number, company, notes</li><li>Filter by status, source, type</li><li>Lead types: MQL, SQL, Deal</li><li>Lead statuses: New, Attempting, Connected, Qualified, Disqualified, Converted</li><li>Contact association (existing or new)</li><li>Qualification workflow</li><li>Notes and follow-up dates</li></ul>
+<h3>FR-4: Deals &amp; Pipeline</h3>
+<ul><li>Create, read, update, delete deals</li><li>Kanban board by pipeline stages</li><li>Move deals between stages</li><li>Deal name, amount, probability, close date</li><li>Filter by pipeline</li><li>Stage totals and counts</li></ul>
+<h3>FR-5: Pipeline Customization</h3>
+<ul><li>Create/rename pipelines</li><li>Add/rename/reorder stages</li><li>Configure stage color</li><li>Mark stage as Closed Won/Closed Lost</li><li>Safe stage deletion</li></ul>
+<h3>FR-6: Lead Sources</h3>
+<ul><li>Simulate 4 lead source types</li><li>Create contact + lead automatically</li><li>Preserve source and timestamp</li><li>Success feedback</li></ul>
+<h3>FR-7: Activities</h3>
+<ul><li>Create activities (call, email, meeting, note, task)</li><li>Due dates, priority, completion status</li><li>Associate with contact/lead/deal</li><li>Filter by type</li><li>Mark complete</li></ul>
+<h3>FR-8: Reports</h3>
+<ul><li>Leads by source, status, over time</li><li>Deals by stage</li><li>Pipeline value</li><li>Won/lost distribution</li><li>CSV export</li></ul>
+<h3>FR-9: Navigation</h3>
+<ul><li>Responsive sidebar</li><li>Active page indication</li><li>Breadcrumbs</li><li>Header with search</li></ul>
+<h2>Non-Functional Requirements</h2>
+<h3>NFR-1: Performance</h3>
+<ul><li>Dashboard loads in under 2 seconds</li><li>List pages support pagination-ready structure</li><li>API responses under 500ms</li></ul>
+<h3>NFR-2: Persistence</h3>
+<ul><li>All data survives page reloads</li><li>SQLite database with Prisma ORM</li><li>Seed data for demonstration</li></ul>
+<h3>NFR-3: Design</h3>
+<ul><li>Professional SaaS appearance</li><li>Consistent design system</li><li>Responsive (desktop, tablet, mobile)</li><li>Proper loading/error/empty states</li></ul>
+<h3>NFR-4: Code Quality</h3>
+<ul><li>Readable JavaScript ES6+</li><li>Component reusability</li><li>Separation of concerns</li><li>Consistent naming conventions</li></ul>
+<h2>Out of Scope (Semester)</h2>
+<ul><li>Real ad/telephony integrations</li><li>Authentication and authorization</li><li>Email sending</li><li>Real-time notifications</li><li>File uploads</li><li>Multi-tenant support</li></ul></section>
+<section class="chapter"><h1 class="chapter-title">Architecture</h1><h2>System Architecture</h2>
+<pre class="code"><code>┌─────────────────────────────────────────────────────┐
+│                    Browser (Client)                  │
+│  ┌───────────────────────────────────────────────┐  │
+│  │  React 19 + Vite 8 + Tailwind CSS 4           │  │
+│  │  ┌─────────┐ ┌─────────┐ ┌─────────────────┐ │  │
+│  │  │ Pages   │ │ UI      │ │ Services        │ │  │
+│  │  │ (Router)│ │ Components│ │ (API Client)    │ │  │
+│  │  └────┬────┘ └─────────┘ └───────┬─────────┘ │  │
+│  │       └──────────┬───────────────┘            │  │
+│  │                  │ fetch()                     │  │
+│  └──────────────────┼────────────────────────────┘  │
+└────────────────────┼────────────────────────────────┘
+                     │ HTTP/REST (localhost:5000)
+┌────────────────────┼────────────────────────────────┐
+│                    ▼                                 │
+│  ┌───────────────────────────────────────────────┐  │
+│  │  Express.js Server (server/server.js)         │  │
+│  │  ┌─────────────────────────────────────────┐  │  │
+│  │  │  Route Handlers (routes/*.js)           │  │  │
+│  │  │  → Controllers (controllers/*.js)       │  │  │
+│  │  │  → Prisma Client                        │  │  │
+│  │  └─────────────────────────────────────────┘  │  │
+│  └───────────────────────────────────────────────┘  │
+│                    │                                 │
+│  ┌───────────────────────────────────────────────┐  │
+│  │  SQLite Database (server/prisma/dev.db)       │  │
+│  │  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐       │  │
+│  │  │User  │ │Contact│ │ Lead │ │ Deal │ ...   │  │
+│  │  └──────┘ └──────┘ └──────┘ └──────┘       │  │
+│  └───────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘</code></pre>
+<h2>Frontend Architecture</h2>
+<h3>Component Hierarchy</h3>
+<pre class="code"><code>App
+├── BrowserRouter
+│   └── Routes
+│       ├── / → AppShell + Dashboard
+│       ├── /contacts → AppShell + Contacts
+│       ├── /leads → AppShell + Leads
+│       ├── /deals → AppShell + Deals
+│       ├── /pipelines → AppShell + Pipelines
+│       ├── /sources → AppShell + Sources
+│       ├── /activities → AppShell + Activities
+│       ├── /reports → AppShell + Reports
+│       └── * → AppShell + NotFound
+
+AppShell
+├── Sidebar (navigation)
+├── Header (breadcrumbs, search, profile)
+└── &lt;main&gt; (page content)</code></pre>
+<h3>Data Flow</h3>
+<ol><li>User interacts with a component → triggers state update</li><li>Component calls API function from <code>src/services/api.js</code></li><li>API function makes <code>fetch()</code> request to Express backend</li><li>Backend route handler calls controller</li><li>Controller uses Prisma Client to query/update database</li><li>Response flows back through the same chain</li><li>Component updates its state → re-renders with new data</li></ol>
+<h3>State Management</h3>
+<ul><li>Local component state with <code>useState</code></li><li><code>useEffect</code> for data loading</li><li>No global state management (Redux/Zustand) for simplicity</li><li>Prop drilling for component communication</li></ul>
+<h2>Backend Architecture</h2>
+<h3>Express Route Pattern</h3>
+<pre class="code"><code>routes/*.js → Express Router
+  ├── GET / → List all (with query params for filtering)
+  ├── GET /:id → Get one
+  ├── POST / → Create
+  ├── PUT /:id → Update
+  └── DELETE /:id → Delete</code></pre>
+<h3>Error Handling</h3>
+<ul><li>Try/catch in every async route handler</li><li>HTTP status codes: 200 (OK), 201 (Created), 400 (Bad Request), 404 (Not Found), 500 (Server Error)</li><li>Consistent error response format: <code>{ error: "message" }</code></li></ul>
+<h2>Database Architecture</h2>
+<h3>Prisma Workflow</h3>
+<ol><li>Define schema in <code>server/prisma/schema.prisma</code></li><li>Run <code>npx prisma db push</code> to create/update SQLite database</li><li>Prisma auto-generates <code>@prisma/client</code></li><li>Controllers use Prisma Client for type-safe queries</li></ol>
+<h3>Relationships</h3>
+<ul><li>Contact 1→N Lead, Deal, Activity</li><li>User 1→N Lead, Deal, Activity</li><li>Pipeline 1→N Stage, Deal</li><li>Stage 1→N Deal</li><li>Deal 1→N Activity</li></ul></section>
+<section class="part"><h2 class="part-title">Part II — Data Layer</h2></section>
+<section class="chapter"><h1 class="chapter-title">Database Guide</h1><h2>Schema Overview</h2>
+<p>The database uses SQLite with Prisma ORM. All tables and relationships are defined in <code>server/prisma/schema.prisma</code>.</p>
+<h2>Entity Relationship Diagram</h2>
+<pre class="code"><code>┌────────────┐       ┌────────────┐       ┌─────────────┐
+│    User    │       │  Contact   │       │  Pipeline   │
+├────────────┤       ├────────────┤       ├─────────────┤
+│ id         │──┐    │ id         │──┐    │ id          │
+│ email      │  │    │ firstName  │  │    │ name        │
+│ name       │  │    │ lastName   │  │    │ description │
+│ role       │  │    │ email      │  │    │ isDefault   │
+│ avatar     │  │    │ phone      │  │    └──────┬──────┘
+│ createdAt  │  │    │ company    │  │           │
+└────────────┘  │    │ jobTitle   │  │     ┌─────┴──────┐
+       │        │    │ location   │  │     │   Stage    │
+       │        │    │ leadSource │  │     ├────────────┤
+       │        │    │ lifeStage  │  │     │ id         │
+       │        │    │ notes      │  │     │ name       │
+       │        │    │ createdAt  │  │     │ position   │
+       │        │    │ updatedAt  │  │     │ color      │
+       │        │    └─────┬──────┘  │     │ isClosedWon│
+       │        │           │          │     │ isClosedLost│
+       │        │    ┌──────┴──────┐  │     └─────┬──────┘
+       │        │    │    Lead     │  │           │
+       │        │    ├────────────┤  │     ┌─────┴──────┐
+       │        │    │ id         │  │     │   Deal     │
+       │        ├───▶│ leadNumber │  │     ├────────────┤
+       │        │    │ status     │  │     │ id         │
+       │        │    │ type       │  │     │ dealName   │
+       │        │    │ source     │  │     │ amount     │
+       │        │    │ company    │  │     │ probability│
+       │        │    │ notes      │  │     │ status     │
+       │        │    │ contactId  │──┘     │ contactId  │
+       │        │    │ createdById│───────▶│ stageId    │────┐
+       │        │    └────────────┘       │ pipelineId │    │
+       │        │                         │ createdById│    │
+       │        │                         └─────┬──────┘    │
+       │        │                               │           │
+       │        │    ┌────────────┐       ┌─────┴──────┐    │
+       │        │    │  Activity  │       │ Notification│   │
+       │        └───▶├────────────┤       ├─────────────┤    │
+       │             │ id        │       │ id          │    │
+       │             │ type      │       │ message     │    │
+       │             │ subject   │       │ type        │    │
+       │             │ dueDate   │       │ read        │    │
+       │             │ completed │       │ createdAt   │    │
+       │             │ contactId │────┐  │ userId      │    │
+       │             │ leadId    │──┐ │  └─────────────┘    │
+       │             │ dealId    │──┘ │                      │
+       │             │ createdById│────┘                      │
+       │             └────────────┘                          │
+       └──────────────────────────────────────────────────────┘</code></pre>
+<h2>Table Descriptions</h2>
+<h3>User</h3>
+<p>Stores application users. Currently minimal (admin user for seeding).</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>email</td><td>String</td><td>Unique</td></tr><tr><td>name</td><td>String</td><td>Full name</td></tr><tr><td>role</td><td>String</td><td>"user" or "admin"</td></tr><tr><td>avatar</td><td>String?</td><td>Profile image URL</td></tr><tr><td>createdAt</td><td>DateTime</td><td>Auto-set</td></tr></tbody></table></div>
+<h3>Contact</h3>
+<p>Central entity for people/organizations. Connected to leads, deals, and activities.</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>firstName, lastName</td><td>String</td><td>Required</td></tr><tr><td>email</td><td>String</td><td>Unique, duplicate prevention</td></tr><tr><td>phone</td><td>String?</td><td>Optional</td></tr><tr><td>company</td><td>String?</td><td>Organization name</td></tr><tr><td>jobTitle</td><td>String?</td><td>Role in organization</td></tr><tr><td>location</td><td>String?</td><td>City/region</td></tr><tr><td>leadSource</td><td>String</td><td>Source of lead</td></tr><tr><td>lifecycleStage</td><td>String</td><td>lead/mql/sql/customer</td></tr><tr><td>notes</td><td>String?</td><td>Free text</td></tr><tr><td>createdAt</td><td>DateTime</td><td>Auto-set</td></tr><tr><td>updatedAt</td><td>DateTime</td><td>Auto-updated</td></tr><tr><td>lastActivityAt</td><td>DateTime</td><td>Updated on activity</td></tr></tbody></table></div>
+<h3>Lead</h3>
+<p>Tracks potential customers through qualification stages.</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>leadNumber</td><td>String</td><td>Unique, e.g., "LEAD-ABC123"</td></tr><tr><td>status</td><td>String</td><td>new/attempting/connected/qualified/disqualified/converted</td></tr><tr><td>type</td><td>String</td><td>mql/sql/deal</td></tr><tr><td>source</td><td>String</td><td>google_ads/meta_ads/website/inbound_call/referral/manual</td></tr><tr><td>company</td><td>String?</td><td>Company name</td></tr><tr><td>companySize</td><td>String?</td><td>e.g., "1-10", "11-50"</td></tr><tr><td>industry</td><td>String?</td><td>Industry vertical</td></tr><tr><td>website</td><td>String?</td><td>Company website</td></tr><tr><td>notes</td><td>String?</td><td>Lead notes</td></tr><tr><td>qualificationNotes</td><td>String?</td><td>Sales qualification notes</td></tr><tr><td>nextFollowUp</td><td>DateTime?</td><td>Scheduled follow-up</td></tr><tr><td>expectedValue</td><td>Float?</td><td>Potential deal value</td></tr><tr><td>contactId</td><td>Int?</td><td>FK → Contact</td></tr><tr><td>createdById</td><td>Int</td><td>FK → User</td></tr></tbody></table></div>
+<h3>Pipeline</h3>
+<p>Represents a sales pipeline (e.g., "Default Sales Pipeline").</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>name</td><td>String</td><td>Pipeline name</td></tr><tr><td>description</td><td>String?</td><td>Optional description</td></tr><tr><td>isDefault</td><td>Boolean</td><td>Default pipeline flag</td></tr><tr><td>createdAt</td><td>DateTime</td><td>Auto-set</td></tr></tbody></table></div>
+<h3>Stage</h3>
+<p>Individual stages within a pipeline.</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>name</td><td>String</td><td>Stage name</td></tr><tr><td>position</td><td>Int</td><td>Order in pipeline</td></tr><tr><td>color</td><td>String</td><td>Hex color for display</td></tr><tr><td>isClosedWon</td><td>Boolean</td><td>Marks won stage</td></tr><tr><td>isClosedLost</td><td>Boolean</td><td>Marks lost stage</td></tr><tr><td>pipelineId</td><td>Int</td><td>FK → Pipeline</td></tr></tbody></table></div>
+<h3>Deal</h3>
+<p>Sales opportunities tied to contacts and pipeline stages.</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>dealName</td><td>String</td><td>Deal name</td></tr><tr><td>amount</td><td>Float</td><td>Deal value</td></tr><tr><td>probability</td><td>Int</td><td>0-100 win probability</td></tr><tr><td>expectedCloseDate</td><td>DateTime?</td><td>Target close</td></tr><tr><td>actualCloseDate</td><td>DateTime?</td><td>When actually closed</td></tr><tr><td>status</td><td>String</td><td>open/won/lost</td></tr><tr><td>lostReason</td><td>String?</td><td>If status=lost</td></tr><tr><td>notes</td><td>String?</td><td>Deal notes</td></tr><tr><td>contactId</td><td>Int</td><td>FK → Contact</td></tr><tr><td>stageId</td><td>Int</td><td>FK → Stage</td></tr><tr><td>pipelineId</td><td>Int</td><td>FK → Pipeline</td></tr><tr><td>createdById</td><td>Int</td><td>FK → User</td></tr></tbody></table></div>
+<h3>Activity</h3>
+<p>Tracks all interactions and tasks.</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>type</td><td>String</td><td>call/email/meeting/note/task</td></tr><tr><td>subject</td><td>String</td><td>Activity title</td></tr><tr><td>description</td><td>String?</td><td>Details</td></tr><tr><td>dueDate</td><td>DateTime?</td><td>Scheduled time</td></tr><tr><td>completed</td><td>Boolean</td><td>Completion flag</td></tr><tr><td>priority</td><td>String</td><td>low/medium/high</td></tr><tr><td>contactId</td><td>Int?</td><td>Optional FK → Contact</td></tr><tr><td>leadId</td><td>Int?</td><td>Optional FK → Lead</td></tr><tr><td>dealId</td><td>Int?</td><td>Optional FK → Deal</td></tr><tr><td>createdById</td><td>Int</td><td>FK → User</td></tr></tbody></table></div>
+<h3>Notification</h3>
+<p>User notifications (stored, not actively rendered in frontend).</p>
+<div class="table-wrap"><table><thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead><tbody><tr><td>id</td><td>Int</td><td>Primary key</td></tr><tr><td>message</td><td>String</td><td>Notification text</td></tr><tr><td>type</td><td>String</td><td>info/success/warning/error</td></tr><tr><td>read</td><td>Boolean</td><td>Read status</td></tr><tr><td>createdAt</td><td>DateTime</td><td>Timestamp</td></tr><tr><td>userId</td><td>Int</td><td>FK → User</td></tr></tbody></table></div>
+<h2>Migrations</h2>
+<p>Schema changes are applied via:</p>
+<pre class="code lang-bash"><code>npx prisma db push --schema server/prisma/schema.prisma</code></pre>
+<p>This is development-mode migration (no migration files). For production, use:</p>
+<pre class="code lang-bash"><code>npx prisma migrate dev --name description</code></pre>
+<h2>Seeding</h2>
+<pre class="code lang-bash"><code>npm run db:seed
+node server/prisma/seed.js</code></pre>
+<p>Creates: 1 admin user, 8 contacts, 8 leads, 7 deals, 1 pipeline with 7 stages, 7 activities.</p></section>
+<section class="chapter"><h1 class="chapter-title">API Reference</h1><p>Base URL: <code>http://localhost:5000/api</code></p>
+<p>All endpoints return JSON. Error responses follow the format: <code>{ "error": "description" }</code></p>
+<h2>Health</h2>
+<ul><li><code>GET /health</code> → <code>{ "status": "ok" }</code></li></ul>
+<h2>Contacts</h2>
+<h3>List Contacts</h3>
+<p><code>GET /contacts?search=&amp;sortBy=createdAt&amp;sortOrder=desc&amp;lifecycleStage=</code></p>
+<p>Query params:</p>
+<ul><li><code>search</code> (string) — Search in name, email, company</li><li><code>sortBy</code> (string) — Field to sort by</li><li><code>sortOrder</code> (string) — "asc" or "desc"</li><li><code>lifecycleStage</code> (string) — Filter by stage</li></ul>
+<p>Response: <code>Contact[]</code> (includes leads, deals, activities)</p>
+<h3>Get Contact</h3>
+<p><code>GET /contacts/:id</code></p>
+<p>Response: <code>Contact | null</code> (404 if not found)</p>
+<h3>Create Contact</h3>
+<p><code>POST /contacts</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{
+  "firstName": "Rajesh",
+  "lastName": "Kumar",
+  "email": "rajesh@example.com",
+  "phone": "+91 9876543210",
+  "company": "TechVista",
+  "jobTitle": "CTO",
+  "location": "Bangalore",
+  "leadSource": "google_ads",
+  "lifecycleStage": "lead",
+  "notes": "Notes here"
+}</code></pre>
+<h3>Update Contact</h3>
+<p><code>PUT /contacts/:id</code></p>
+<p>Body: Same as create (partial update supported)</p>
+<h3>Delete Contact</h3>
+<p><code>DELETE /contacts/:id</code></p>
+<h2>Leads</h2>
+<h3>List Leads</h3>
+<p><code>GET /leads?search=&amp;status=&amp;source=&amp;type=</code></p>
+<p>Query params:</p>
+<ul><li><code>search</code> — Search in leadNumber, company, notes</li><li><code>status</code> — new/attempting/connected/qualified/disqualified/converted</li><li><code>source</code> — google_ads/meta_ads/website/inbound_call/referral/manual</li><li><code>type</code> — mql/sql/deal</li></ul>
+<h3>Get Lead</h3>
+<p><code>GET /leads/:id</code></p>
+<h3>Create Lead</h3>
+<p><code>POST /leads</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{
+  "contactId": 1,
+  "createdById": 1,
+  "source": "google_ads",
+  "type": "mql",
+  "company": "TechVista",
+  "notes": "Notes",
+  "expectedValue": 150000,
+  "nextFollowUp": "2026-10-20T00:00:00.000Z"
+}</code></pre>
+<h3>Update Lead</h3>
+<p><code>PUT /leads/:id</code></p>
+<p>Body: Partial update</p>
+<h3>Delete Lead</h3>
+<p><code>DELETE /leads/:id</code></p>
+<h3>Qualify Lead</h3>
+<p><code>POST /leads/:id/qualify</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{
+  "type": "sql",
+  "qualificationNotes": "High budget, decision maker confirmed",
+  "contactEmail": "new@example.com",
+  "contactFirstName": "John",
+  "contactLastName": "Doe"
+}</code></pre>
+<p>If type is sql/deal and contact doesn't exist, creates a new contact.</p>
+<h3>Convert Lead</h3>
+<p><code>POST /leads/:id/convert</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{
+  "notes": "Deal notes"
+}</code></pre>
+<h2>Deals</h2>
+<h3>List Deals</h3>
+<p><code>GET /deals?search=&amp;status=&amp;stageId=&amp;pipelineId=</code></p>
+<h3>Get Deal</h3>
+<p><code>GET /deals/:id</code></p>
+<h3>Create Deal</h3>
+<p><code>POST /deals</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{
+  "dealName": "TechVista CRM",
+  "amount": 150000,
+  "contactId": 1,
+  "stageId": 1,
+  "pipelineId": 1,
+  "createdById": 1,
+  "probability": 80,
+  "expectedCloseDate": "2026-11-01",
+  "notes": "Notes"
+}</code></pre>
+<h3>Update Deal</h3>
+<p><code>PUT /deals/:id</code></p>
+<h3>Delete Deal</h3>
+<p><code>DELETE /deals/:id</code></p>
+<h3>Move Deal Stage</h3>
+<p><code>PATCH /deals/:id/stage</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{ "stageId": 2 }</code></pre>
+<p>Automatically updates deal status based on stage (won/lost).</p>
+<h2>Pipelines</h2>
+<h3>List Pipelines</h3>
+<p><code>GET /pipelines</code></p>
+<h3>Get Pipeline</h3>
+<p><code>GET /pipelines/:id</code></p>
+<h3>Create Pipeline</h3>
+<p><code>POST /pipelines</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{
+  "name": "New Pipeline",
+  "description": "Description",
+  "isDefault": false,
+  "stages": [
+    { "name": "Stage 1", "position": 0, "color": "#6366f1" }
+  ]
+}</code></pre>
+<h3>Update Pipeline</h3>
+<p><code>PUT /pipelines/:id</code></p>
+<h3>Delete Pipeline</h3>
+<p><code>DELETE /pipelines/:id</code> — Fails if deals exist</p>
+<h3>Add Stage</h3>
+<p><code>POST /pipelines/:pipelineId/stages</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{ "name": "New Stage", "color": "#6366f1", "position": 0, "isClosedWon": false, "isClosedLost": false }</code></pre>
+<h3>Update Stage</h3>
+<p><code>PUT /pipelines/stages/:id</code></p>
+<h3>Delete Stage</h3>
+<p><code>DELETE /pipelines/stages/:id</code> — Fails if deals exist</p>
+<h2>Dashboard</h2>
+<p><code>GET /dashboard</code></p>
+<p>Returns aggregated metrics:</p>
+<pre class="code lang-json"><code>{
+  "totalContacts": 8,
+  "totalLeads": 8,
+  "mqlCount": 5,
+  "sqlCount": 2,
+  "openDeals": 5,
+  "openPipelineValue": 555000,
+  "closedWonRevenue": 300000,
+  "closedLostValue": 60000,
+  "leadsBySource": [...],
+  "leadsByStatus": [...],
+  "dealsByStage": [...],
+  "recentLeads": [...],
+  "recentActivities": [...],
+  "leadsOverTime": [...],
+  "conversionRate": { "total": 8, "converted": 1, "rate": 13 }
+}</code></pre>
+<h2>Activities</h2>
+<h3>List</h3>
+<p><code>GET /activities?contactId=&amp;leadId=&amp;dealId=&amp;type=&amp;completed=</code></p>
+<h3>Get</h3>
+<p><code>GET /activities/:id</code></p>
+<h3>Create</h3>
+<p><code>POST /activities</code></p>
+<p>Body:</p>
+<pre class="code lang-json"><code>{
+  "type": "call",
+  "subject": "Discovery call",
+  "description": "Discussed requirements",
+  "dueDate": "2026-10-20",
+  "priority": "high",
+  "contactId": 1,
+  "leadId": null,
+  "dealId": null,
+  "createdById": 1
+}</code></pre>
+<h3>Update</h3>
+<p><code>PUT /activities/:id</code></p>
+<h3>Delete</h3>
+<p><code>DELETE /activities/:id</code></p>
+<h2>Simulated Sources</h2>
+<p>All return the created Lead with associated Contact.</p>
+<ul><li><code>POST /sources/google-ads</code> — Simulated Google Ads lead</li><li><code>POST /sources/meta-ads</code> — Simulated Meta Ads lead</li><li><code>POST /sources/website-form</code> — Simulated website form lead</li><li><code>POST /sources/inbound-call</code> — Simulated inbound call lead</li></ul>
+<h2>Reports</h2>
+<p><code>GET /reports</code></p>
+<p>Returns:</p>
+<pre class="code lang-json"><code>{
+  "leadsBySource": [{"source": "google_ads", "_count": 2}],
+  "leadsByStatus": [{"status": "new", "_count": 2}],
+  "dealsByStage": [{"stageId": 1, "_count": 3, "_sum": {"amount": 150000}}],
+  "wonLost": [{"status": "won", "_count": 1, "_sum": {"amount": 300000}}],
+  "monthlyRevenue": [{"month": "2026-10", "revenue": 300000}]
+}</code></pre></section>
+<section class="part"><h2 class="part-title">Part III — Frontend</h2></section>
+<section class="chapter"><h1 class="chapter-title">JavaScript Guide</h1><h2>ES6+ Features Used</h2>
+<h3>Arrow Functions</h3>
+<pre class="code lang-jsx"><code>// Component definition
+export default function Dashboard() { ... }
+
+// Callback
+const handleClick = () =&gt; { ... }
+
+// Array methods
+items.map(item =&gt; &lt;div key={item.id}&gt;{item.name}&lt;/div&gt;)</code></pre>
+<h3>Destructuring</h3>
+<pre class="code lang-jsx"><code>// Props destructuring
+function Card({ title, value, icon: Icon, color = 'indigo' }) { ... }
+
+// Array destructuring
+const [firstName, lastName] = names[idx].split(' ')
+
+// Object destructuring
+const { totalContacts, openDeals } = dashboardData</code></pre>
+<h3>Template Literals</h3>
+<pre class="code lang-jsx"><code>const url = `${API_BASE}${endpoint}`
+&lt;p className={`text-sm ${active ? 'font-bold' : ''}`}&gt;Label&lt;/p&gt;</code></pre>
+<h3>Spread Operator</h3>
+<pre class="code lang-jsx"><code>// Merge objects
+const where = { ...(search ? { OR: [...] } : {}) }
+
+// Pass props
+&lt;button {...props} /&gt;</code></pre>
+<h3>Array Methods</h3>
+<pre class="code lang-jsx"><code>// map - transform arrays to JSX
+contacts.map(c =&gt; &lt;tr key={c.id}&gt;...&lt;/tr&gt;)
+
+// filter - select subset
+const stageDeals = deals.filter(d =&gt; d.stageId === stage.id)
+
+// reduce - aggregate
+const stageValue = stageDeals.reduce((sum, d) =&gt; sum + d.amount, 0)
+
+// find - locate element
+const selectedPipeline = pipelines.find(p =&gt; p.id === Number(pipelineFilter))
+
+// forEach - iterate
+activitySubjects.forEach((a, i) =&gt; { ... })</code></pre>
+<h3>Async/Await</h3>
+<pre class="code lang-jsx"><code>const loadContacts = async () =&gt; {
+  setLoading(true)
+  try {
+    const data = await api.getContacts(params)
+    setContacts(data)
+  } catch (e) {
+    console.error('Failed to load:', e)
+  }
+  setLoading(false)
+}</code></pre>
+<h3>Modules</h3>
+<pre class="code lang-jsx"><code>// Named exports
+export default function Dashboard() { ... }
+export function CardSkeleton() { ... }
+
+// Named imports
+import { useState, useEffect } from 'react'
+import { api } from '../services/api'
+import { formatCurrency } from '../utils/constants'
+
+// Default imports
+import Button from '../ui/Button'</code></pre>
+<h3>Optional Chaining &amp; Nullish Coalescing</h3>
+<pre class="code lang-jsx"><code>const value = data?._sum?.amount || 0
+const name = lead?.contact?.firstName || 'Unknown'</code></pre>
+<h2>Promises and Error Handling</h2>
+<pre class="code lang-jsx"><code>// Promise chains (used in route handlers)
+router.get('/', (req, res) =&gt; {
+  getContacts(req.query)
+    .then(data =&gt; res.json(data))
+    .catch(err =&gt; res.status(500).json({ error: err.message }))
+})
+
+// Async/await with try/catch (used in components)
+try {
+  await api.createContact(form)
+  toast.success('Created!')
+} catch (err) {
+  setError(err.message)
+}</code></pre>
+<h2>Event Handling</h2>
+<pre class="code lang-jsx"><code>// Click handlers
+&lt;button onClick={() =&gt; setModalOpen(true)}&gt;Open&lt;/button&gt;
+&lt;button onClick={handleSubmit}&gt;Submit&lt;/button&gt;
+
+// Form submission
+&lt;form onSubmit={handleSubmit}&gt;
+  &lt;input onChange={e =&gt; setForm({ ...form, name: e.target.value })} /&gt;
+&lt;/form&gt;
+
+// Event delegation (table row click with button stopPropagation)
+&lt;tr onClick={() =&gt; viewContact(c)}&gt;
+  &lt;button onClick={e =&gt; { e.stopPropagation(); editContact(c) }}&gt;Edit&lt;/button&gt;
+&lt;/tr&gt;</code></pre>
+<h2>Conditional Rendering</h2>
+<pre class="code lang-jsx"><code>// Ternary
+{loading ? &lt;Skeleton /&gt; : &lt;DataTable /&gt;}
+
+// Short-circuit
+{error &amp;&amp; &lt;div className="text-red-600"&gt;{error}&lt;/div&gt;}
+
+// Map with conditional
+{items.map(item =&gt; (
+  &lt;div key={item.id} className={item.active ? 'bg-green-50' : 'bg-gray-50'}&gt;
+    {item.active ? &lt;ActiveBadge /&gt; : &lt;InactiveBadge /&gt;}
+  &lt;/div&gt;
+))}</code></pre></section>
+<section class="chapter"><h1 class="chapter-title">React Guide</h1><h2>Core Concepts</h2>
+<h3>What is React?</h3>
+<p>React is a JavaScript library for building user interfaces. It lets you compose UI pieces called "components" and efficiently update the DOM when data changes.</p>
+<h3>JSX (JavaScript XML)</h3>
+<p>JSX looks like HTML but runs inside JavaScript:</p>
+<pre class="code lang-jsx"><code>// This JSX:
+&lt;div className="card"&gt;
+  &lt;h2&gt;{title}&lt;/h2&gt;
+  &lt;p&gt;{description}&lt;/p&gt;
+&lt;/div&gt;
+
+// Gets compiled to:
+React.createElement('div', { className: 'card' },
+  React.createElement('h2', null, title),
+  React.createElement('p', null, description)
+)</code></pre>
+<h3>Components</h3>
+<p>Components are reusable building blocks. Each component is a function that returns JSX:</p>
+<pre class="code lang-jsx"><code>function Button({ children, onClick, variant }) {
+  return &lt;button onClick={onClick} className={variant}&gt;{children}&lt;/button&gt;
+}</code></pre>
+<h3>Props (Properties)</h3>
+<p>Props pass data from parent to child:</p>
+<pre class="code lang-jsx"><code>// Parent passes props
+&lt;Card title="Total Leads" value={42} icon={Users} color="indigo" /&gt;
+
+// Child receives props
+function Card({ title, value, icon: Icon, color }) {
+  return (
+    &lt;div&gt;
+      &lt;p&gt;{title}&lt;/p&gt;
+      &lt;p&gt;{value}&lt;/p&gt;
+      {Icon &amp;&amp; &lt;Icon className="w-5 h-5" /&gt;}
+    &lt;/div&gt;
+  )
+}</code></pre>
+<h3>State (useState)</h3>
+<p>State is a component's internal memory. When state changes, React re-renders:</p>
+<pre class="code lang-jsx"><code>const [contacts, setContacts] = useState([])    // Array state
+const [loading, setLoading] = useState(true)     // Boolean state
+const [modalOpen, setModalOpen] = useState(false) // Toggle state
+const [form, setForm] = useState({ name: '' })   // Object state</code></pre>
+<h3>useEffect Hook</h3>
+<p><code>useEffect</code> runs code after a render. Common patterns:</p>
+<p><strong>Data fetching:</strong></p>
+<pre class="code lang-jsx"><code>useEffect(() =&gt; {
+  async function load() {
+    const data = await api.getDashboard()
+    setData(data)
+  }
+  load()
+}, []) // Empty array = run once on mount</code></pre>
+<p><strong>Dependency array:</strong></p>
+<pre class="code lang-jsx"><code>useEffect(() =&gt; {
+  loadContacts()
+}, [search, statusFilter]) // Re-run when these change</code></pre>
+<h3>Controlled Forms</h3>
+<p>Form inputs whose values are controlled by React state:</p>
+<pre class="code lang-jsx"><code>&lt;input
+  value={form.firstName}
+  onChange={e =&gt; setForm({ ...form, firstName: e.target.value })}
+/&gt;</code></pre>
+<h3>Conditional Rendering</h3>
+<p>Show different UI based on conditions:</p>
+<pre class="code lang-jsx"><code>{loading &amp;&amp; &lt;Skeleton /&gt;}
+{error &amp;&amp; &lt;Error message={error} /&gt;}
+{data.length === 0 ? &lt;Empty /&gt; : &lt;List items={data} /&gt;}</code></pre>
+<h3>Lists and Keys</h3>
+<p>Render arrays with <code>.map()</code> and provide unique keys:</p>
+<pre class="code lang-jsx"><code>{contacts.map(contact =&gt; (
+  &lt;tr key={contact.id}&gt;
+    &lt;td&gt;{contact.firstName}&lt;/td&gt;
+  &lt;/tr&gt;
+))}</code></pre>
+<h2>React Router (react-router-dom v7)</h2>
+<h3>Route Configuration</h3>
+<pre class="code lang-jsx"><code>&lt;Routes&gt;
+  &lt;Route path="/" element={&lt;AppShell&gt;&lt;Dashboard /&gt;&lt;/AppShell&gt;} /&gt;
+  &lt;Route path="/contacts" element={&lt;AppShell&gt;&lt;Contacts /&gt;&lt;/AppShell&gt;} /&gt;
+  &lt;Route path="*" element={&lt;AppShell&gt;&lt;NotFound /&gt;&lt;/AppShell&gt;} /&gt;
+&lt;/Routes&gt;</code></pre>
+<h3>Navigation Links</h3>
+<pre class="code lang-jsx"><code>import { NavLink } from 'react-router-dom'
+
+&lt;NavLink to="/contacts" className={({ isActive }) =&gt;
+  isActive ? 'bg-primary-50 text-primary-700' : 'text-surface-600'
+}&gt;
+  Contacts
+&lt;/NavLink&gt;</code></pre>
+<h3>Breadcrumbs</h3>
+<pre class="code lang-jsx"><code>import { useLocation } from 'react-router-dom'
+const location = useLocation()
+// location.pathname gives current route</code></pre>
+<h2>Component Reuse</h2>
+<h3>UI Components (src/components/ui/)</h3>
+<div class="table-wrap"><table><thead><tr><th>Component</th><th>Purpose</th></tr></thead><tbody><tr><td>Button</td><td>Consistent button styling with variants</td></tr><tr><td>Badge</td><td>Status indicators with color coding</td></tr><tr><td>Card</td><td>KPI display card with icon</td></tr><tr><td>Modal</td><td>Reusable modal dialog</td></tr><tr><td>Input</td><td>Input, Select, Textarea with labels and error states</td></tr><tr><td>SearchableSelect</td><td>Dropdown with search/filter</td></tr></tbody></table></div>
+<h3>Pattern: Props + Composition</h3>
+<pre class="code lang-jsx"><code>// Generic Modal accepts any children
+&lt;Modal isOpen={open} onClose={close} title="Edit Contact"&gt;
+  &lt;form onSubmit={handleSubmit}&gt;
+    &lt;Input label="Name" ... /&gt;
+    &lt;Button type="submit"&gt;Save&lt;/Button&gt;
+  &lt;/form&gt;
+&lt;/Modal&gt;
+
+// Same Modal for confirmations
+&lt;Modal isOpen={showConfirm} onClose={close} title="Confirm"&gt;
+  &lt;p&gt;Are you sure?&lt;/p&gt;
+  &lt;Button onClick={onConfirm}&gt;Yes&lt;/Button&gt;
+&lt;/Modal&gt;</code></pre>
+<h2>State Management in This App</h2>
+<p>No Redux/Zustand — uses local state only:</p>
+<ul><li>Each page component manages its own data state</li><li><code>useState</code> + <code>useEffect</code> for data fetching</li><li>Props for passing callbacks between components</li><li>Simple and sufficient for this application scale</li></ul>
+<h2>Key React Concepts Demonstrated</h2>
+<div class="table-wrap"><table><thead><tr><th>Concept</th><th>Where Used</th></tr></thead><tbody><tr><td>useState</td><td>Every page component</td></tr><tr><td>useEffect</td><td>Data loading in Dashboard, Contacts, Leads, Deals, Activities, Reports</td></tr><tr><td>Props</td><td>All component composition</td></tr><tr><td>JSX</td><td>Entire application</td></tr><tr><td>Component composition</td><td>AppShell wrapping page content</td></tr><tr><td>Conditional rendering</td><td>Loading states, empty states, modals</td></tr><tr><td>List rendering</td><td>Table rows, cards, dropdown options</td></tr><tr><td>Event handlers</td><td>onClick, onChange, onSubmit</td></tr><tr><td>Controlled components</td><td>All form inputs</td></tr><tr><td>useRef</td><td>SearchableSelect dropdown</td></tr><tr><td>React Router</td><td>App.jsx route definitions</td></tr></tbody></table></div></section>
+<section class="chapter"><h1 class="chapter-title">Frontend Guide</h1><h2>File Structure</h2>
+<pre class="code"><code>src/
+  components/
+    layout/
+      AppShell.jsx      — Main layout wrapper (sidebar + header + content)
+      Sidebar.jsx       — Navigation sidebar with collapse
+      Header.jsx        — Top bar with breadcrumbs, search, profile
+    ui/
+      Button.jsx        — Reusable button (primary/secondary/danger/ghost/success)
+      Badge.jsx         — Status badges with colors
+      Card.jsx          — KPI card for dashboard + CardSkeleton loader
+      Modal.jsx         — Modal dialog + ConfirmDialog
+      Input.jsx         — Input, Select, Textarea (named exports + default)
+      SearchableSelect.jsx — Searchable dropdown
+    common/
+      NotFound.jsx      — 404 page
+    dashboard/Dashboard.jsx
+    contacts/Contacts.jsx
+    leads/Leads.jsx
+    deals/Deals.jsx
+    pipelines/Pipelines.jsx
+    sources/Sources.jsx
+    activities/Activities.jsx
+    reports/Reports.jsx
+  services/api.js       — Centralized API client
+  utils/constants.js    — Constants, formatters, helpers
+  App.jsx               — Route definitions
+  main.jsx              — Entry point (BrowserRouter + Toaster)
+  index.css             — Tailwind imports + custom theme + scrollbar</code></pre>
+<h2>Component Patterns</h2>
+<h3>Data Loading Pattern</h3>
+<pre class="code lang-jsx"><code>// Every page component follows this pattern:
+const [data, setData] = useState([])
+const [loading, setLoading] = useState(true)
+
+const load = async () =&gt; {
+  setLoading(true)
+  try {
+    const result = await api.getXxx()
+    setData(result)
+  } catch (e) {
+    console.error(e)
+  }
+  setLoading(false)
+}
+
+useEffect(() =&gt; { load() }, [dependencies])</code></pre>
+<h3>Form Pattern</h3>
+<pre class="code lang-jsx"><code>const [form, setForm] = useState(initialValues)
+const handleSubmit = async (e) =&gt; {
+  e.preventDefault()
+  try {
+    await api.createXxx(form)
+    setModalOpen(false)
+    loadData()
+  } catch (err) {
+    setError(err.message)
+  }
+}</code></pre>
+<h3>Search/Filter Pattern</h3>
+<pre class="code lang-jsx"><code>const [search, setSearch] = useState('')
+useEffect(() =&gt; { loadData() }, [search, otherFilters])</code></pre>
+<h2>Styling Conventions</h2>
+<ul><li>Use Tailwind utility classes</li><li>Color tokens: <code>surface-50</code> to <code>surface-900</code>, <code>primary-50</code> to <code>primary-900</code></li><li>Spacing: standard Tailwind scale</li><li>Border radius: <code>rounded-lg</code> (8px) for cards, <code>rounded-xl</code> (12px) for containers</li><li>Shadows: <code>shadow-sm</code> for cards, <code>shadow-md</code> on hover, <code>shadow-lg</code> for modals</li><li>Transitions: <code>transition-colors</code> or <code>transition-shadow</code></li></ul>
+<h2>Design Tokens (index.css)</h2>
+<pre class="code lang-css"><code>--color-primary-500: #6366f1    /* Indigo accent */
+--color-primary-600: #4f46e5    /* Primary button/hover */
+--color-surface-50:  #f8fafc    /* Page background */
+--color-surface-100: #f1f5f9    /* Alternating rows */
+--color-surface-200: #e2e8f0    /* Borders */
+--color-surface-500: #64748b    /* Secondary text */
+--color-surface-700: #334155    /* Headers */
+--color-surface-800: #1e293b    /* Primary text */</code></pre>
+<h2>Recharts Usage</h2>
+<pre class="code lang-jsx"><code>import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
+
+&lt;ResponsiveContainer width="100%" height={260}&gt;
+  &lt;LineChart data={chartData}&gt;
+    &lt;CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" /&gt;
+    &lt;XAxis dataKey="date" tick={{ fontSize: 11, fill: '#94a3b8' }} /&gt;
+    &lt;YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} /&gt;
+    &lt;Tooltip contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '13px' }} /&gt;
+    &lt;Line type="monotone" dataKey="count" stroke="#6366f1" strokeWidth={2} /&gt;
+  &lt;/LineChart&gt;
+&lt;/ResponsiveContainer&gt;</code></pre>
+<h2>Responsive Breakpoints</h2>
+<ul><li><code>sm:</code> — 640px (tablet)</li><li><code>md:</code> — 768px (large tablet)</li><li><code>lg:</code> — 1024px (desktop)</li></ul>
+<p>Grid examples:</p>
+<pre class="code lang-jsx"><code>// Cards: 1 col mobile → 2 col tablet → 4 col desktop
+className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+
+// Charts: 1 col mobile → 2 col desktop
+className="grid grid-cols-1 lg:grid-cols-2 gap-6"</code></pre>
+<h2>Icons (Lucide React)</h2>
+<p>All icons imported from <code>lucide-react</code>:</p>
+<pre class="code lang-jsx"><code>import { Users, Plus, Search, Edit, Trash2, Phone, Mail } from 'lucide-react'
+// Usage: &lt;Users className="w-5 h-5" /&gt;</code></pre>
+<p>Standard icon sizes:</p>
+<ul><li>Navigation: <code>w-5 h-5</code></li><li>Buttons: <code>w-4 h-4</code></li><li>Cards: <code>w-5 h-5</code></li></ul>
+<h2>API Client Pattern</h2>
+<p>All API calls go through <code>src/services/api.js</code>:</p>
+<pre class="code lang-jsx"><code>import { api } from '../services/api'
+
+// Simple get
+const data = await api.getDashboard()
+
+// With params
+const contacts = await api.getContacts({ search, sortBy })
+
+// POST/PUT with body
+const newLead = await api.createLead(formData)
+
+// Delete
+await api.deleteContact(id)</code></pre>
+<p>The client handles:</p>
+<ul><li>Base URL prefix (<code>/api</code>)</li><li>JSON serialization</li><li>Error propagation</li><li>Consistent interface</li></ul></section>
+<section class="part"><h2 class="part-title">Part IV — Operations</h2></section>
+<section class="chapter"><h1 class="chapter-title">Setup and Run</h1><h2>Prerequisites</h2>
+<ul><li>Node.js 18+ (tested with v24.14.0)</li><li>npm 9+ (tested with v11.21.0)</li></ul>
+<h2>Step-by-Step Setup</h2>
+<h3>1. Clone/Open the Project</h3>
+<pre class="code lang-bash"><code>cd C:/Users/Nischay\ r\ gowda/MY_PROJECTS/crm-platform</code></pre>
+<h3>2. Install Dependencies</h3>
+<pre class="code lang-bash"><code>npm install</code></pre>
+<h3>3. Configure Environment</h3>
+<pre class="code lang-bash"><code>echo DATABASE_URL="file:./server/prisma/dev.db" &gt; .env</code></pre>
+<h3>4. Push Database Schema</h3>
+<pre class="code lang-bash"><code>npx prisma db push --schema server/prisma/schema.prisma</code></pre>
+<h3>5. Seed Sample Data</h3>
+<pre class="code lang-bash"><code>node server/prisma/seed.js</code></pre>
+<p>Expected output: <code>Database seeded successfully!</code></p>
+<h3>6. Start the Application</h3>
+<p><strong>Option A: Run both servers together</strong></p>
+<pre class="code lang-bash"><code>npm run dev:all</code></pre>
+<p><strong>Option B: Run separately (two terminals)</strong></p>
+<p>Terminal 1 — Backend:</p>
+<pre class="code lang-bash"><code>npm run server</code></pre>
+<p>Terminal 2 — Frontend:</p>
+<pre class="code lang-bash"><code>npm run dev</code></pre>
+<h3>7. Open in Browser</h3>
+<p>Navigate to <code>http://localhost:5173</code></p>
+<h2>Troubleshooting</h2>
+<h3>Port Already in Use</h3>
+<pre class="code lang-bash"><code>netstat -ano | findstr :5000
+taskkill //PID &lt;PID&gt; //F
+
+netstat -ano | findstr :5173
+taskkill //PID &lt;PID&gt; //F</code></pre>
+<h3>Prisma Client Not Generated</h3>
+<pre class="code lang-bash"><code>npx prisma generate --schema server/prisma/schema.prisma</code></pre>
+<h3>Database Issues (Reset)</h3>
+<pre class="code lang-bash"><code>del server\prisma\dev.db
+
+npx prisma db push --schema server/prisma/schema.prisma
+
+node server/prisma/seed.js</code></pre>
+<h3>Build Errors</h3>
+<pre class="code lang-bash"><code>rm -rf node_modules/.vite
+npx vite build</code></pre>
+<h2>Production Build</h2>
+<pre class="code lang-bash"><code>npm run build
+npm run preview</code></pre>
+<p>The built files will be in <code>dist/</code>.</p>
+<h2>Database Studio (Optional)</h2>
+<pre class="code lang-bash"><code>npx prisma studio --schema server/prisma/schema.prisma</code></pre>
+<h2>Available Scripts</h2>
+<div class="table-wrap"><table><thead><tr><th>Script</th><th>Command</th><th>Description</th></tr></thead><tbody><tr><td>dev</td><td><code>npm run dev</code></td><td>Vite dev server (port 5173)</td></tr><tr><td>server</td><td><code>npm run server</code></td><td>Express backend (port 5000)</td></tr><tr><td>dev:all</td><td><code>npm run dev:all</code></td><td>Both servers concurrently</td></tr><tr><td>build</td><td><code>npm run build</code></td><td>Production build</td></tr><tr><td>preview</td><td><code>npm run preview</code></td><td>Preview production build</td></tr><tr><td>lint</td><td><code>npm run lint</code></td><td>ESLint check</td></tr><tr><td>db:push</td><td><code>npm run db:push</code></td><td>Push schema to SQLite</td></tr><tr><td>db:seed</td><td><code>npm run db:seed</code></td><td>Seed sample data</td></tr><tr><td>db:studio</td><td><code>npm run db:studio</code></td><td>Open Prisma Studio</td></tr></tbody></table></div></section>
+<section class="chapter"><h1 class="chapter-title">Testing Report</h1><h2>Environment</h2>
+<ul><li>OS: Windows 11 Home Single Language</li><li>Node.js: v24.14.0</li><li>npm: v11.21.0</li><li>React: 19.2.8</li><li>Vite: 8.3.0</li><li>Prisma: 6.8.0</li><li>SQLite: bundled with Prisma</li></ul>
+<h2>Test Results</h2>
+<h3>Build &amp; Lint</h3>
+<div class="table-wrap"><table><thead><tr><th>Test</th><th>Status</th><th>Notes</th></tr></thead><tbody><tr><td><code>npm run build</code></td><td>PASS</td><td>Production build succeeds, ~1.6s, 762 kB JS / 38 kB CSS</td></tr><tr><td><code>npm run lint</code></td><td>PASS</td><td>0 errors, 0 warnings across all source files</td></tr><tr><td><code>npm run check:routes</code></td><td>PASS</td><td>All 38 frontend API calls resolve to registered Express routes</td></tr></tbody></table></div>
+<h3>Backend Tests</h3>
+<div class="table-wrap"><table><thead><tr><th>Test</th><th>Status</th><th>Notes</th></tr></thead><tbody><tr><td>Server starts</td><td>PASS</td><td>Express server on port 5000</td></tr><tr><td>Health endpoint</td><td>PASS</td><td><code>GET /api/health</code> returns <code>{"status":"ok"}</code></td></tr><tr><td>Dashboard endpoint</td><td>PASS</td><td>Returns 8 KPIs, charts data, recent items</td></tr><tr><td>Contacts CRUD</td><td>PASS</td><td>Create, read, update, delete all work</td></tr><tr><td>Leads CRUD</td><td>PASS</td><td>Create, read, update, delete all work</td></tr><tr><td>Deals CRUD</td><td>PASS</td><td>Create, read, update, delete all work</td></tr><tr><td>Lead qualification</td><td>PASS</td><td>MQL→SQL qualification with contact creation</td></tr><tr><td>Simulate Google Ads</td><td>PASS</td><td>Creates contact + MQL lead with source=google_ads</td></tr><tr><td>Simulate Meta Ads</td><td>PASS</td><td>Creates contact + MQL lead with source=meta_ads</td></tr><tr><td>Simulate Website</td><td>PASS</td><td>Creates contact + MQL lead with source=website</td></tr><tr><td>Simulate Inbound Call</td><td>PASS</td><td>Creates contact + MQL lead with source=inbound_call</td></tr><tr><td>Pipeline CRUD</td><td>PASS</td><td>Create pipeline with stages</td></tr><tr><td>Stage CRUD</td><td>PASS</td><td>Create, update, delete stages</td></tr><tr><td>Deal stage movement</td><td>PASS</td><td>Moves deal between stages, updates status</td></tr><tr><td>Dashboard calculations</td><td>PASS</td><td>Correctly distinguishes open/won/lost</td></tr><tr><td>Reports endpoint</td><td>PASS</td><td>Returns source, status, stage, revenue data</td></tr><tr><td>Duplicate email prevention</td><td>PASS</td><td>Returns error on duplicate contact email</td></tr><tr><td>Stage deletion safety</td><td>PASS</td><td>Returns error when stage has deals</td></tr></tbody></table></div>
+<h3>Frontend Tests</h3>
+<div class="table-wrap"><table><thead><tr><th>Test</th><th>Status</th><th>Notes</th></tr></thead><tbody><tr><td>Vite dev server</td><td>PASS</td><td>Serves on port 5173</td></tr><tr><td>React Router navigation</td><td>PASS</td><td>All 8 routes resolve correctly</td></tr><tr><td>Sidebar navigation</td><td>PASS</td><td>Active page highlighting</td></tr><tr><td>404 page</td><td>PASS</td><td>Shows with navigation links</td></tr><tr><td>Dashboard renders</td><td>PASS</td><td>8 KPI cards + 4 charts + recent sections</td></tr><tr><td>Contacts page renders</td><td>PASS</td><td>Table with seeded data</td></tr><tr><td>Leads page renders</td><td>PASS</td><td>Table with 8 seeded leads</td></tr><tr><td>Deals page renders</td><td>PASS</td><td>Kanban board with 7 seeded deals</td></tr><tr><td>Pipelines page renders</td><td>PASS</td><td>Expandable pipeline cards</td></tr><tr><td>Sources page renders</td><td>PASS</td><td>4 source cards with simulate buttons</td></tr><tr><td>Activities page renders</td><td>PASS</td><td>Activity list with 7 seeded activities</td></tr><tr><td>Reports page renders</td><td>PASS</td><td>4 charts with data</td></tr><tr><td>Hot reload</td><td>PASS</td><td>Vite HMR functional</td></tr><tr><td>Toast notifications</td><td>PASS</td><td>Success/error toasts display</td></tr></tbody></table></div>
+<h3>Database Tests</h3>
+<div class="table-wrap"><table><thead><tr><th>Test</th><th>Status</th><th>Notes</th></tr></thead><tbody><tr><td>Schema created</td><td>PASS</td><td>All 7 tables created</td></tr><tr><td>Seed data</td><td>PASS</td><td>8 contacts, 8 leads, 7 deals, 7 stages, 7 activities</td></tr><tr><td>Relationships</td><td>PASS</td><td>Foreign keys working correctly</td></tr><tr><td>Data persistence</td><td>PASS</td><td>Survives server restart</td></tr></tbody></table></div>
+<h2>End-to-End Demo Verification</h2>
+<div class="table-wrap"><table><thead><tr><th>Step</th><th>Expected</th><th>Actual</th></tr></thead><tbody><tr><td>1. Open dashboard</td><td>See 8 KPIs, charts, recent items</td><td>PASS</td></tr><tr><td>2. Simulate Google Ads lead</td><td>New MQL lead + contact created</td><td>PASS</td></tr><tr><td>3. Find lead in Leads page</td><td>Visible in table with source=Google Ads</td><td>PASS</td></tr><tr><td>4. Open its contact</td><td>Contact details show</td><td>PASS</td></tr><tr><td>5. Explain source and MQL status</td><td>Correct badges displayed</td><td>PASS</td></tr><tr><td>6. Qualify lead to SQL</td><td>Status changes, contact created/linked</td><td>PASS</td></tr><tr><td>7. Create deal</td><td>Deal in pipeline</td><td>PASS</td></tr><tr><td>8. Move deal through stages</td><td>Stage changes, status updates</td><td>PASS</td></tr><tr><td>9. Mark Closed Won</td><td>Deal status=won, actualCloseDate set</td><td>PASS</td></tr><tr><td>10. Dashboard updates</td><td>Figures reflect new data</td><td>PASS</td></tr></tbody></table></div>
+<h2>Known Issues</h2>
+<ul><li>No authentication (documented limitation)</li><li>Simulated integrations are demonstrations only</li><li>CSV export exports raw data, not formatted charts</li><li>Large datasets may need pagination (not implemented)</li></ul>
+<h2>Dashboard Accuracy (arithmetic cross-check)</h2>
+<p>Every KPI was recomputed from the raw record sets and compared to the API response. All values matched exactly.</p>
+<div class="table-wrap"><table><thead><tr><th>Metric</th><th>Verification method</th><th>Result</th></tr></thead><tbody><tr><td><code>totalContacts</code></td><td>Compared to <code>contacts.length</code></td><td>PASS (22 = 22)</td></tr><tr><td><code>totalLeads</code></td><td>Compared to <code>leads.length</code></td><td>PASS</td></tr><tr><td><code>mqlCount</code></td><td>Compared to <code>leads.filter(type === 'mql').length</code></td><td>PASS</td></tr><tr><td><code>sqlCount</code></td><td>Compared to <code>leads.filter(type === 'sql').length</code></td><td>PASS</td></tr><tr><td><code>openDeals</code></td><td>Compared to <code>deals.filter(status === 'open').length</code></td><td>PASS</td></tr><tr><td><code>openPipelineValue</code></td><td>Compared to sum of open-deal amounts</td><td>PASS (805000)</td></tr><tr><td><code>closedWonRevenue</code></td><td>Compared to sum of won-deal amounts</td><td>PASS</td></tr><tr><td><code>closedLostValue</code></td><td>Compared to sum of lost-deal amounts</td><td>PASS (585000)</td></tr><tr><td>Won excluded from open</td><td>Confirmed open value does not include won deals</td><td>PASS</td></tr><tr><td>Lost excluded from won</td><td>Confirmed won revenue unchanged when a deal is lost</td><td>PASS</td></tr></tbody></table></div>
+<p>A deal was created, marked won, and the dashboard re-read: closed-won revenue rose by exactly the deal amount while open pipeline value stayed flat, then dropped back when the deal was marked lost. No revenue is ever double-counted.</p>
+<h2>Route Parity</h2>
+<p><code>npm run check:routes</code> parses <code>server/server.js</code> mounts plus every <code>router.&lt;verb&gt;()</code> declaration and compares them against every <code>apiRequest()</code> call in <code>src/services/api.js</code>. Result: 38 routes, 38 calls, 38 matches. This catches the failure mode where a UI button silently 404s because an endpoint was renamed.</p>
+<h2>Persistence</h2>
+<p>Server was stopped and restarted with no other changes. All counts and totals were byte-identical before and after: contacts=26, leads=19, open=805000, won=800000, lost=585000, deals=12.</p>
+<h2>Untested</h2>
+<ul><li>Mobile responsive testing (not verified on real physical devices)</li><li>Browser automation / component-level tests (no test runner installed; adding</li></ul>
+<p>  one was out of scope for the deadline)</p>
+<ul><li>Production build served to a real browser for visual inspection</li></ul>
+<p>Note on an earlier entry: this report previously listed lint as NOT TESTED. Lint has since been run and passes clean; the row above reflects that.</p></section>
+<section class="chapter"><h1 class="chapter-title">Known Limitations</h1><h2>Authentication</h2>
+<ul><li><strong>No authentication or authorization</strong> — All APIs are open. This is documented as a known limitation. Adding auth would require session management (JWT or sessions), protected routes, and user-specific data isolation.</li></ul>
+<h2>Lead Source Simulations</h2>
+<ul><li>All 4 lead source integrations are <strong>simulated demonstrations</strong>. They do not connect to Google Ads, Meta Ads, website forms, or telephony systems. Real integrations would require OAuth, webhooks, API keys, and third-party SDKs.</li></ul>
+<h2>Email/Notifications</h2>
+<ul><li>No real email sending. Activities of type "email" are logged records only.</li><li>Notifications table exists in the database but has no frontend display component.</li></ul>
+<h2>Data Scale</h2>
+<ul><li>No pagination — all records loaded at once. Acceptable for semester demo but not production scale.</li><li>No lazy loading or infinite scroll.</li><li>SQLite is suitable for development but not recommended for production multi-user deployment.</li></ul>
+<h2>Deal Movement</h2>
+<ul><li>Kanban board uses button-based stage movement (Back/Next). Drag-and-drop was considered but excluded for reliability within the deadline.</li></ul>
+<h2>Reporting</h2>
+<ul><li>Basic charts only. No date range filtering, no comparison views, no scheduled reports.</li><li>CSV export is minimal — raw data only.</li></ul>
+<h2>Search</h2>
+<ul><li>Simple substring matching. No full-text search, no fuzzy matching, no search suggestions.</li></ul>
+<h2>Import/Export</h2>
+<ul><li>No data import (CSV, Excel). Only CSV export for reports.</li><li>No backup/restore functionality.</li></ul>
+<h2>Multi-tenancy</h2>
+<ul><li>Single-tenant only. No organization/workspace isolation.</li></ul>
+<h2>Mobile</h2>
+<ul><li>Layout is responsive but not fully optimized for mobile use. CRM workflows are primarily desktop-oriented.</li></ul>
+<h2>Audit Logging</h2>
+<ul><li>No audit trail of who changed what and when (beyond Prisma's updatedAt timestamps).</li></ul>
+<h2>Integrations</h2>
+<ul><li>No calendar integration, no email sync, no document storage, no third-party CRM sync.</li></ul></section>
+<section class="chapter"><h1 class="chapter-title">Future Roadmap</h1><h2>Phase 1: Authentication &amp; Security</h2>
+<ul><li>[ ] JWT-based authentication</li><li>[ ] Role-based access control (Admin, Manager, Sales Rep, Viewer)</li><li>[ ] Password reset flow</li><li>[ ] Protected API routes</li><li>[ ] User-specific data isolation</li></ul>
+<h2>Phase 2: Enhanced Lead Management</h2>
+<ul><li>[ ] Lead scoring algorithm</li><li>[ ] Lead routing/assignment rules</li><li>[ ] Duplicate lead detection</li><li>[ ] Bulk import leads (CSV)</li><li>[ ] Lead enrichment (auto-fill company info)</li><li>[ ] Email tracking and sequences</li></ul>
+<h2>Phase 3: Advanced Pipeline</h2>
+<ul><li>[ ] Drag-and-drop Kanban (react-dnd or @dnd-kit)</li><li>[ ] Multiple pipeline templates</li><li>[ ] Forecast vs actual reporting</li><li>[ ] Deal probability auto-calculation</li><li>[ ] Commission tracking</li></ul>
+<h2>Phase 4: Communication</h2>
+<ul><li>[ ] Real email sending (Nodemailer + SMTP)</li><li>[ ] Email templates</li><li>[ ] Click tracking and open rates</li><li>[ ] SMS integration</li><li>[ ] In-app notifications with read/unread</li></ul>
+<h2>Phase 5: Reporting &amp; Analytics</h2>
+<ul><li>[ ] Custom date range filters</li><li>[ ] Custom report builder</li><li>[ ] Sales forecasting</li><li>[ ] Team performance metrics</li><li>[ ] Export to PDF</li><li>[ ] Dashboard customization</li></ul>
+<h2>Phase 6: Integrations</h2>
+<ul><li>[ ] Google Ads API integration</li><li>[ ] Meta Ads API integration</li><li>[ ] Website form webhook handler</li><li>[ ] Calendar sync (Google Calendar)</li><li>[ ] Zapier/Make.com webhooks</li><li>[ ] REST API for external integrations</li></ul>
+<h2>Phase 7: Advanced Features</h2>
+<ul><li>[ ] Document management</li><li>[ ] Contract generation</li><li>[ ] Invoice creation</li><li>[ ] Payment tracking</li><li>[ ] Customer portal</li><li>[ ] Mobile app (React Native)</li><li>[ ] Dark mode</li><li>[ ] Multi-language support</li></ul>
+<h2>Phase 8: Infrastructure</h2>
+<ul><li>[ ] PostgreSQL migration</li><li>[ ] Docker containerization</li><li>[ ] CI/CD pipeline</li><li>[ ] Cloud deployment (Vercel + Railway/Render)</li><li>[ ] Monitoring and logging</li><li>[ ] Automated backups</li></ul></section>
+<section class="part"><h2 class="part-title">Part V — Presentation</h2></section>
+<section class="chapter"><h1 class="chapter-title">Final Presentation Outline</h1><h2>Presentation Structure (~15-20 minutes)</h2>
+<h3>Slide 1: Title</h3>
+<ul><li>Project: Nexus CRM</li><li>Student name and ID</li><li>Course: Full Stack Development 1</li><li>University and semester</li></ul>
+<h3>Slide 2: Problem Statement</h3>
+<ul><li>Why CRMs are important for businesses</li><li>Gap: Small businesses can't afford enterprise CRMs</li><li>Solution: A simple, effective, open-source CRM</li></ul>
+<h3>Slide 3: Product Workflow</h3>
+<ul><li>Visual flow: Lead Sources → MQL → SQL → Deal → Pipeline → Close</li><li>Screenshot of Dashboard</li></ul>
+<h3>Slide 4: Technology Stack</h3>
+<ul><li>Frontend: React, Vite, Tailwind CSS, Recharts, Lucide React</li><li>Backend: Express.js</li><li>Database: SQLite + Prisma</li><li>Why each technology was chosen</li></ul>
+<h3>Slide 5: Architecture</h3>
+<ul><li>System architecture diagram</li><li>Frontend/backend separation</li><li>Data flow diagram</li></ul>
+<h3>Slide 6: Database Design</h3>
+<ul><li>ERD diagram</li><li>Key relationships explained</li><li>Why relational database was chosen</li></ul>
+<h3>Slide 7: Dashboard Module</h3>
+<ul><li>Live demo: Open dashboard</li><li>Explain 8 KPIs and how they're calculated</li><li>Explain charts (Recharts)</li><li>How data flows from database → API → frontend</li></ul>
+<h3>Slide 8: Lead Management</h3>
+<ul><li>MQL vs SQL vs Deal</li><li>Lead lifecycle</li><li>Live demo: Simulate a lead, view in table</li></ul>
+<h3>Slide 9: Contact Management</h3>
+<ul><li>CRUD operations</li><li>Duplicate prevention</li><li>Lifecycle stages</li><li>Live demo</li></ul>
+<h3>Slide 10: Deals &amp; Pipeline</h3>
+<ul><li>Kanban board demo</li><li>Stage movement</li><li>Deal tracking</li><li>Live demo: Create deal, move through stages</li></ul>
+<h3>Slide 11: Lead Sources (Simulated)</h3>
+<ul><li>Explain each simulation</li><li>How contacts are auto-created/linked</li><li>Live demo</li></ul>
+<h3>Slide 12: Code Walkthrough</h3>
+<ul><li>Show 2-3 key files</li><li>Explain data flow through one feature end-to-end</li><li>Example: Dashboard → API → Controller → Prisma → Database</li></ul>
+<h3>Slide 13: Challenges &amp; Solutions</h3>
+<ul><li>Prisma schema design decisions</li><li>Frontend state management approach</li><li>Build/import troubleshooting</li><li>Design system implementation</li></ul>
+<h3>Slide 14: Testing &amp; Results</h3>
+<ul><li>Test coverage summary</li><li>End-to-end demo results</li><li>Known issues</li></ul>
+<h3>Slide 15: Future Enhancements</h3>
+<ul><li>Roadmap highlights</li><li>Authentication</li><li>Real integrations</li><li>Mobile app</li></ul>
+<h3>Slide 16: Thank You / Q&amp;A</h3>
+<ul><li>Thank you slide</li><li>GitHub link</li><li>Live demo URL</li></ul>
+<h2>Demo Script (5-7 minutes)</h2>
+<h3>Part 1: Dashboard (1 min)</h3>
+<ol><li>Open <code>http://localhost:5173</code></li><li>Point out KPI cards — explain each metric</li><li>Show charts — lead acquisition, source distribution</li></ol>
+<h3>Part 2: Simulate Lead (1 min)</h3>
+<ol><li>Navigate to Lead Sources</li><li>Click "Simulate Google Ads Lead"</li><li>Show success toast</li><li>Point out what was created (contact + lead)</li></ol>
+<h3>Part 3: View &amp; Qualify Lead (2 min)</h3>
+<ol><li>Navigate to Leads</li><li>Find the new lead</li><li>Explain MQL status and source</li><li>Click Qualify → select SQL → fill contact info → submit</li><li>Show status updated to SQL</li></ol>
+<h3>Part 4: Create Deal &amp; Pipeline (2 min)</h3>
+<ol><li>Navigate to Deals</li><li>Create a new deal for the lead</li><li>Show deal in Kanban board</li><li>Move deal through stages (Next button)</li><li>Show stage totals update</li></ol>
+<h3>Part 5: Dashboard Update (1 min)</h3>
+<ol><li>Return to Dashboard</li><li>Show updated metrics reflecting new lead and deal</li><li>Charts reflect new data</li></ol>
+<h2>Key Talking Points</h2>
+<h3>Technical</h3>
+<ul><li>Explain why React hooks (useState/useEffect) are used</li><li>Walk through one API call: component → api.js → Express route → controller → Prisma → SQLite</li><li>Explain Tailwind CSS design system approach</li><li>Explain Recharts for data visualization</li></ul>
+<h3>CRM Concepts</h3>
+<ul><li>MQL = Marketing Qualified Lead (generated from marketing efforts)</li><li>SQL = Sales Qualified Lead (verified by sales team)</li><li>Deal = Active sales opportunity with expected value</li><li>Pipeline = Visual representation of deals in various stages</li><li>Conversion rate = Converted leads / Total leads</li></ul>
+<h3>Design Decisions</h3>
+<ul><li>Why Tailwind CSS over CSS modules (consistency, speed, design system)</li><li>Why SQLite (zero-config, perfect for semester project)</li><li>Why no auth (documented limitation, kept scope manageable)</li><li>Why simulated integrations (real APIs require accounts, keys, rate limits)</li></ul></section>
+<section class="chapter"><h1 class="chapter-title">Viva Question Bank</h1><h2>100+ Questions with Answers</h2>
+<h3>General / Introduction</h3>
+<p><strong>Q1. What is Nexus CRM?</strong> A: Nexus CRM is a full-stack Customer Relationship Management web application. It helps businesses manage contacts, leads, deals, and sales pipelines. It's built with React (frontend), Express.js (backend), and SQLite with Prisma ORM (database).</p>
+<p><strong>Q2. What problem does this CRM solve?</strong> A: It helps small and medium businesses track leads, manage contacts, and visualize their sales pipeline. Instead of using spreadsheets or multiple disconnected tools, everything is in one place.</p>
+<p><strong>Q3. What technologies did you use and why?</strong> A:</p>
+<ul><li>React — For building a dynamic, component-based UI with efficient re-rendering</li><li>Vite — Fast build tool with hot module replacement during development</li><li>Tailwind CSS — Utility-first CSS framework for rapid, consistent styling</li><li>Recharts — React charting library for dashboard visualizations</li><li>Lucide React — Clean, consistent icon library</li><li>Express.js — Minimal, flexible Node.js backend framework</li><li>Prisma ORM — Type-safe database access with auto-generated queries</li><li>SQLite — Zero-configuration file-based database, perfect for development</li></ul>
+<h3>HTML/CSS/Tailwind</h3>
+<p><strong>Q4. What is JSX?</strong> A: JSX is a syntax extension for JavaScript that lets you write HTML-like code inside JavaScript files. For example: <code>&lt;div className="card"&gt;&lt;h2&gt;{title}&lt;/h2&gt;&lt;/div&gt;</code>. It gets compiled to <code>React.createElement()</code> calls.</p>
+<p><strong>Q5. Why use className instead of class in JSX?</strong> A: Because <code>class</code> is a reserved keyword in JavaScript. JSX uses <code>className</code> which maps to the HTML <code>class</code> attribute.</p>
+<p><strong>Q6. What is Tailwind CSS?</strong> A: Tailwind CSS is a utility-first CSS framework. Instead of writing custom CSS classes, you compose designs using pre-built utility classes like <code>flex</code>, <code>p-4</code>, <code>text-lg</code>, <code>bg-blue-500</code>. This ensures consistency and speeds up development.</p>
+<p><strong>Q7. How does the CSS work in this project?</strong> A: We use Tailwind CSS v4 with the Vite plugin. Custom design tokens (colors like <code>primary-500</code>, <code>surface-800</code>) are defined in <code>index.css</code> using CSS custom properties. Tailwind generates utility classes from these tokens.</p>
+<p><strong>Q8. What is the difference between px, py, gap, and space?</strong> A:</p>
+<ul><li><code>px-4</code> = padding-left + padding-right = 16px</li><li><code>py-4</code> = padding-top + padding-bottom = 16px</li><li><code>gap-4</code> = space between flex/grid items = 16px</li><li><code>space-y-4</code> = vertical space between direct children</li></ul>
+<p><strong>Q9. How does the responsive design work?</strong> A: Using Tailwind's responsive prefixes:</p>
+<ul><li><code>sm:</code> applies at 640px+</li><li><code>md:</code> applies at 768px+</li><li><code>lg:</code> applies at 1024px+</li></ul>
+<p>Example: <code>grid-cols-1 sm:grid-cols-2 lg:grid-cols-4</code> means 1 column on mobile, 2 on tablet, 4 on desktop.</p>
+<h3>JavaScript</h3>
+<p><strong>Q10. What are arrow functions?</strong> A: Arrow functions are a shorter syntax for writing functions in ES6: <code>const add = (a, b) =&gt; a + b</code>. They also inherit <code>this</code> from the enclosing scope. Used throughout the project for callbacks and component definitions.</p>
+<p><strong>Q11. What is destructuring?</strong> A: Destructuring extracts values from arrays or objects into variables. Example: <code>const [contacts, setContacts] = useState([])</code> extracts the state value and setter. <code>const { name, email } = contact</code> extracts properties from an object.</p>
+<p><strong>Q12. What is the spread operator?</strong> A: The spread operator (<code>...</code>) expands an array or object. Used to merge objects: <code>{ ...form, firstName: 'New' }</code> creates a new object with all of form's properties plus a changed firstName.</p>
+<p><strong>Q13. What are template literals?</strong> A: Template literals use backticks (<code><code> </code> </code><code>) and allow embedded expressions with </code>${}<code>. Example: </code><code> </code>Hello, ${name}!<code> </code>`. Also supports multi-line strings.</p>
+<p><strong>Q14. What are promises and async/await?</strong> A: Promises represent async operations. <code>async/await</code> is syntactic sugar for working with promises. Example:</p>
+<pre class="code lang-js"><code>async function load() {
+  const data = await api.getDashboard() // waits for response
+  setData(data)
+}</code></pre>
+<p><strong>Q15. What is the fetch API?</strong> A: The <code>fetch()</code> API makes HTTP requests. It returns a Promise that resolves to a Response object. We use it in <code>src/services/api.js</code> to communicate with the backend:</p>
+<pre class="code lang-js"><code>const response = await fetch('/api/contacts')
+const data = await response.json()</code></pre>
+<p><strong>Q16. How does error handling work in this app?</strong> A: We use try/catch blocks around all async operations. API errors are caught and displayed to users via error messages or toast notifications. Backend errors return <code>{ error: "message" }</code> with appropriate HTTP status codes.</p>
+<h3>React</h3>
+<p><strong>Q17. What is React?</strong> A: React is a JavaScript library for building user interfaces using components. It uses a virtual DOM for efficient updates and follows a declarative programming model.</p>
+<p><strong>Q18. What are React components?</strong> A: Components are reusable pieces of UI. In this project, we use functional components — JavaScript functions that return JSX. Examples: <code>Dashboard</code>, <code>Contacts</code>, <code>Button</code>, <code>Card</code>.</p>
+<p><strong>Q19. What are props?</strong> A: Props (properties) are how data flows from parent to child components. Example: <code>&lt;Card title="Total Leads" value={42} icon={Users} /&gt;</code> passes title, value, and icon to the Card component.</p>
+<p><strong>Q20. What is JSX?</strong> (See Q4) A: JSX is a syntax extension that allows writing HTML-like code in JavaScript. It's compiled to React.createElement() calls.</p>
+<p><strong>Q21. What is state in React?</strong> A: State is a component's internal memory. When state changes, React re-renders the component. We use <code>useState</code> hook: <code>const [contacts, setContacts] = useState([])</code>.</p>
+<p><strong>Q22. What is the useState hook?</strong> A: <code>useState</code> is a React hook that adds state to functional components. It returns an array: <code>[currentValue, setterFunction]</code>. Calling the setter triggers a re-render.</p>
+<p><strong>Q23. What is the useEffect hook?</strong> A: <code>useEffect</code> lets you perform side effects in components (data fetching, subscriptions, DOM manipulation). It runs after every render by default. With a dependency array, it runs only when those dependencies change.</p>
+<p><strong>Q24. What is the dependency array in useEffect?</strong> A: The second argument to useEffect. <code>useEffect(() =&gt; {...}, [dep1, dep2])</code> means the effect runs only when dep1 or dep2 changes. Empty array <code>[]</code> means run once (on mount).</p>
+<p><strong>Q25. What is conditional rendering?</strong> A: Showing different UI based on conditions. Examples:</p>
+<ul><li>Ternary: <code>{loading ? &lt;Spinner /&gt; : &lt;Content /&gt;}</code></li><li>Short-circuit: <code>{error &amp;&amp; &lt;Error /&gt;}</code></li><li>If/else inside JSX</li></ul>
+<p><strong>Q26. What is the key prop in lists?</strong> A: The <code>key</code> prop helps React identify which items changed, were added, or removed. It should be a unique, stable identifier (like an ID). Example: <code>{items.map(item =&gt; &lt;li key={item.id}&gt;...&lt;/li&gt;)}</code>.</p>
+<p><strong>Q27. What are controlled components?</strong> A: Form inputs whose values are controlled by React state. The value comes from state, and changes are handled by an onChange handler. Example: <code>&lt;input value={form.name} onChange={e =&gt; setForm({...form, name: e.target.value})} /&gt;</code>.</p>
+<p><strong>Q28. What is React Router?</strong> A: React Router is a library for handling navigation in React apps. It maps URL paths to components. In this app, it maps <code>/</code>, <code>/contacts</code>, <code>/leads</code>, etc. to their respective page components.</p>
+<p><strong>Q29. What is the difference between BrowserRouter and HashRouter?</strong> A: BrowserRouter uses the HTML5 History API (clean URLs like <code>/contacts</code>). HashRouter uses URL hashes (<code>/#/contacts</code>). We use BrowserRouter because the server is configured to serve the app for all routes.</p>
+<h3>Project-Specific</h3>
+<p><strong>Q30. What is the application structure?</strong> A:</p>
+<ul><li><code>src/components/</code> — Reusable UI and page components</li><li><code>src/services/api.js</code> — Centralized API client</li><li><code>src/utils/constants.js</code> — Constants, formatters, helper functions</li><li><code>server/</code> — Express.js backend with routes and controllers</li><li><code>server/prisma/</code> — Prisma schema and seed data</li><li><code>docs/</code> — Documentation</li></ul>
+<p><strong>Q31. How does data flow from the database to the Dashboard?</strong> A: 1. Dashboard component mounts, calls <code>api.getDashboard()</code></p>
+<ol><li>api.js makes <code>fetch('/api/dashboard')</code></li><li>Express route handler receives the request</li><li>Dashboard controller runs multiple Prisma queries (counts, aggregates, groupBys)</li><li>Controller returns compiled metrics</li><li>Route sends JSON response</li><li>Dashboard component receives data, updates state</li><li>React re-renders with new KPI values and chart data</li></ol>
+<p><strong>Q32. How many API endpoints are there?</strong> A: Approximately 25+ endpoints across 8 route groups (contacts, leads, deals, pipelines, dashboard, activities, sources, reports) plus health check.</p>
+<p><strong>Q33. What is Prisma and why use it?</strong> A: Prisma is an ORM (Object-Relational Mapping) tool. It converts TypeScript/JavaScript code into database queries. Benefits: type-safe queries, auto-completion, migrations, and a clean data model definition language.</p>
+<p><strong>Q34. How does the lead qualification workflow work?</strong> A: A lead starts as MQL (Marketing Qualified Lead). When the sales team qualifies it, they use the qualify endpoint:</p>
+<ol><li>Set type to 'sql' (Sales Qualified Lead)</li><li>Optionally provide contact details (creates contact if not exists)</li><li>The lead's status updates to 'qualified'</li><li>When ready to become a deal, type changes to 'deal' and status to 'converted'</li></ol>
+<p><strong>Q35. How are duplicate contacts prevented?</strong> A: The Contact model has a unique constraint on the email field. When creating or updating, the controller checks for existing emails and returns an error if a duplicate is found.</p>
+<p><strong>Q36. How does the Kanban pipeline work?</strong> A: The Deals page groups deals by pipeline stage. Each stage is a column showing stage name, deal count, and total value. Users move deals by clicking "Next" or "Back" buttons, which calls the stage movement API.</p>
+<p><strong>Q37. What are lead sources and why are they simulated?</strong> A: Lead sources represent where leads come from (Google Ads, Meta Ads, Website, Calls). They're simulated because real integrations require API keys, accounts, webhooks, and complex authentication — beyond a semester project scope. The simulation creates realistic-looking data.</p>
+<p><strong>Q38. How does the sidebar know which page is active?</strong> A: Using React Router's <code>useLocation()</code> hook. Each NavLink checks if the current pathname matches its path and applies an <code>active</code> class (primary background color).</p>
+<p><strong>Q39. What is the design system?</strong> A: A consistent set of colors (primary indigo, neutral surfaces), spacing scale, border radii, shadows, and typography defined in Tailwind config. All components use these tokens for visual consistency.</p>
+<p><strong>Q40. How does the search work in Contacts/Leads?</strong> A: The search input's value is stored in React state. It's passed as a query parameter to the API (<code>?search=...</code>). The backend uses Prisma's <code>contains</code> filter to match against relevant fields (name, email, company, lead number).</p>
+<h3>Backend</h3>
+<p><strong>Q41. What is Express.js?</strong> A: Express.js is a minimalist web framework for Node.js. It provides routing, middleware, and request/response handling. In this project, it serves REST API endpoints that the frontend consumes.</p>
+<p><strong>Q42. What is REST API?</strong> A: REST (Representational State Transfer) is an architectural style for APIs. It uses HTTP methods (GET, POST, PUT, DELETE) on resource URLs. Our API follows REST: <code>GET /api/contacts</code>, <code>POST /api/contacts</code>, etc.</p>
+<p><strong>Q43. What is middleware in Express?</strong> A: Middleware functions that run before route handlers. In our server:</p>
+<ul><li><code>cors()</code> — Allows cross-origin requests from frontend</li><li><code>express.json()</code> — Parses JSON request bodies</li></ul>
+<p><strong>Q44. How does the server handle errors?</strong> A: Each route handler wraps controller calls in try/catch. Errors are caught and sent as JSON with appropriate HTTP status codes (400 for bad requests, 404 for not found, 500 for server errors).</p>
+<p><strong>Q45. What is Prisma Client?</strong> A: The auto-generated query builder from the Prisma schema. It provides type-safe methods like <code>prisma.contact.findMany()</code>, <code>prisma.lead.create()</code>, etc.</p>
+<p><strong>Q46. What are Prisma relations?</strong> A: Defined in the schema with <code>@relation</code> attributes. Examples:</p>
+<ul><li>Contact has many Leads (<code>contactId</code> foreign key)</li><li>Deal belongs to Contact, Stage, Pipeline (three foreign keys)</li><li>Activity optionally belongs to Contact, Lead, or Deal</li></ul>
+<p><strong>Q47. What is Prisma seeding?</strong> A: The <code>seed.js</code> file populates the database with sample data. It creates users, contacts, leads, deals, pipeline stages, and activities. Run with <code>node server/prisma/seed.js</code>.</p>
+<p><strong>Q48. How does the database persist data?</strong> A: SQLite stores all data in a single file (<code>server/prisma/dev.db</code>). This file persists between server restarts. All CRUD operations through Prisma are written to this file.</p>
+<p><strong>Q49. What HTTP status codes does the API use?</strong> A:</p>
+<ul><li>200: Successful GET/PUT/DELETE</li><li>201: Successful POST (resource created)</li><li>400: Bad request (validation errors)</li><li>404: Resource not found</li><li>500: Server error</li></ul>
+<p><strong>Q50. What is CORS and why is it needed?</strong> A: CORS (Cross-Origin Resource Sharing) allows the frontend (port 5173) to make requests to the backend (port 5000). Browsers block cross-origin requests by default. The <code>cors()</code> middleware adds appropriate headers.</p>
+<h3>Database</h3>
+<p><strong>Q51. What is SQLite?</strong> A: SQLite is a file-based relational database. It doesn't require a server — the database is a single file. Perfect for development and small applications.</p>
+<p><strong>Q52. What is an ERD (Entity Relationship Diagram)?</strong> A: A diagram showing database tables and their relationships. In Nexus CRM: User→Lead, Contact→Lead/Deal/Activity, Pipeline→Stage→Deal, etc.</p>
+<p><strong>Q53. What are foreign keys?</strong> A: A foreign key is a column that references a primary key in another table. Example: <code>deal.contactId</code> references <code>contact.id</code>. This creates relationships between tables.</p>
+<p><strong>Q54. What is a unique constraint?</strong> A: A database constraint ensuring a field's value is unique across all rows. Example: <code>email</code> on Contact has <code>@unique</code>, preventing duplicate emails.</p>
+<p><strong>Q55. What is ON DELETE CASCADE?</strong> A: A foreign key behavior where deleting a parent record also deletes child records. Example: Deleting a Pipeline cascades to delete its Stages.</p>
+<p><strong>Q56. What is ON DELETE SET NULL?</strong> A: A foreign key behavior where deleting a parent record sets the child's foreign key to NULL. Example: Deleting a Contact sets <code>lead.contactId</code> to NULL (lead still exists but loses its contact).</p>
+<p><strong>Q57. What is Prisma's db push?</strong> A: A development command that creates/updates the database schema to match the Prisma schema definition. Unlike migrations, it doesn't create migration history files.</p>
+<h3>CRM Concepts</h3>
+<p><strong>Q58. What is MQL?</strong> A: MQL stands for Marketing Qualified Lead. A lead that has shown interest through marketing efforts (ads, website visits, downloads) but hasn't been verified by sales.</p>
+<p><strong>Q59. What is SQL?</strong> A: SQL stands for Sales Qualified Lead. A lead that the sales team has verified as having genuine interest, budget, and authority to purchase.</p>
+<p><strong>Q60. What is a sales pipeline?</strong> A: A visual representation of where deals are in the sales process. Stages typically progress from "New Opportunity" through "Negotiation" to "Closed Won/Lost".</p>
+<p><strong>Q61. What is lead scoring?</strong> A: A methodology to rank leads based on their likelihood to convert. Not fully implemented in this MVP, but the qualification system is the foundation.</p>
+<p><strong>Q62. What is conversion rate?</strong> A: The percentage of leads that become customers. In Nexus CRM: <code>(converted leads / total leads) * 100</code>.</p>
+<p><strong>Q63. What is pipeline value?</strong> A: The total monetary value of all open (not yet won or lost) deals in the pipeline. Used for sales forecasting.</p>
+<p><strong>Q64. What is the difference between a contact and a lead?</strong> A: A contact is a person/company record (email, phone, etc.). A lead is a potential customer that goes through a qualification process. One contact can have multiple leads over time.</p>
+<h3>Code Quality</h3>
+<p><strong>Q65. What coding conventions does the project follow?</strong> A:</p>
+<ul><li>camelCase for variables and functions</li><li>PascalCase for components</li><li>Descriptive variable names</li><li>Consistent file structure</li><li>Component reusability</li><li>Separation of concerns (routes, controllers, UI)</li></ul>
+<p><strong>Q66. Why use functional components instead of class components?</strong> A: Functional components are simpler, support hooks, and are the modern React standard. They require less boilerplate code and are easier to test.</p>
+<p><strong>Q67. What is component composition?</strong> A: Building complex UIs by combining smaller components. Example: <code>AppShell</code> wraps every page with <code>Sidebar</code> + <code>Header</code> + content area.</p>
+<p><strong>Q68. Why keep API logic separate from UI?</strong> A: Separation of concerns makes the codebase maintainable. If the API endpoint changes, only <code>src/services/api.js</code> needs updating — not every component that uses it.</p>
+<h3>Challenges</h3>
+<p><strong>Q69. What challenges did you face?</strong> A:</p>
+<ol><li>Prisma v8 RC configuration complexity — resolved by using stable Prisma v6</li><li>Import path consistency across component directories</li><li>Designing a scalable but simple state management approach</li><li>Making the UI look professional without a design system library</li></ol>
+<p><strong>Q70. How did you handle the Prisma version issues?</strong> A: Initially installed Prisma v8 RC which requires a new config format. Downgraded to Prisma v6.8.0 which uses the familiar <code>schema.prisma</code> with <code>url</code> in datasource.</p>
+<p><strong>Q71. What was the hardest feature to implement?</strong> A: The qualification workflow — it needed to handle contact creation/linking, status changes, and type transitions while maintaining data consistency.</p>
+<p><strong>Q72. How would you scale this application?</strong> A: 1. Add authentication and authorization</p>
+<ol><li>Migrate from SQLite to PostgreSQL</li><li>Add pagination for large datasets</li><li>Implement proper state management (Redux/Zustand)</li><li>Add comprehensive testing (Jest, React Testing Library)</li><li>Containerize with Docker</li></ol>
+<h3>Extras</h3>
+<p><strong>Q73. What is the purpose of the <code>key</code> prop in React lists?</strong> A: The <code>key</code> prop helps React identify which list items changed, were added, or removed. Without keys, React may re-render the entire list, causing performance issues and bugs.</p>
+<p><strong>Q74. What is the virtual DOM?</strong> A: React maintains a lightweight copy of the actual DOM in memory. When state changes, React updates the virtual DOM first, compares it with the previous version (diffing), and only updates the actual DOM where changes occurred.</p>
+<p><strong>Q75. What is hot module replacement (HMR)?</strong> A: A Vite feature that updates modules in the running application without a full page reload. When you edit a component, the change appears instantly while preserving the current application state.</p>
+<p><strong>Q76. What is the difference between npm and npx?</strong> A: <code>npm</code> installs packages from npm registry. <code>npx</code> executes packages without installing them globally. We use <code>npx prisma</code> to run the Prisma CLI without globally installing it.</p>
+<p><strong>Q77. What is a package.json file?</strong> A: A manifest file for Node.js projects. It lists project metadata, dependencies, and scripts. Our <code>package.json</code> defines 8 scripts (dev, server, build, etc.) and all package dependencies.</p>
+<p><strong>Q78. What is Vite?</strong> A: A modern build tool for web projects. It provides instant server start, lightning-fast hot module replacement, and optimized production builds. Uses Rollup under the hood for production bundling.</p>
+<p><strong>Q79. What is a hook in React?</strong> A: Hooks are functions that let you use React features (state, lifecycle, context) in functional components. Examples: <code>useState</code> (adds state), <code>useEffect</code> (adds side effects).</p>
+<p><strong>Q80. What is the difference between controlled and uncontrolled components?</strong> A: Controlled: React state controls the input value (<code>&lt;input value={x} onChange={...} /&gt;</code>). Uncontrolled: DOM controls the value (using refs). We use controlled components for form validation.</p>
+<p><strong>Q81. What is a promise in JavaScript?</strong> A: A Promise represents a value that may be available now, later, or never. It has three states: pending, fulfilled, or rejected. Used for async operations like API calls.</p>
+<p><strong>Q82. What is the event loop?</strong> A: JavaScript's mechanism for handling async operations. It monitors the call stack and callback queue, executing queued callbacks when the stack is empty.</p>
+<p><strong>Q83. What is JSON?</strong> A: JavaScript Object Notation — a lightweight data interchange format. All API requests and responses use JSON: <code>{ "firstName": "Rajesh", "email": "rajesh@example.com" }</code>.</p>
+<p><strong>Q84. What is CORS?</strong> (See Q50)</p>
+<p><strong>Q85. What is REST?</strong> (See Q42)</p>
+<p><strong>Q86. What is a singleton pattern in Prisma?</strong> A: Prisma Client is designed to be a singleton — one instance per application. Creating multiple instances can cause connection pool exhaustion. Our server creates one <code>new PrismaClient()</code> at the top level.</p>
+<p><strong>Q87. What is the difference between PUT and PATCH?</strong> A: PUT replaces an entire resource. PATCH partially updates a resource. We use PUT for full updates (edit contact form) and PATCH for partial updates (just changing deal stage).</p>
+<p><strong>Q88. What is a foreign key constraint violation?</strong> A: An error that occurs when you try to create a record with a foreign key that doesn't exist in the referenced table. For example, creating a deal with a <code>stageId</code> that doesn't exist.</p>
+<p><strong>Q89. What is Prisma's upsert?</strong> A: An operation that updates a record if it exists, or creates it if it doesn't. Used in simulated lead sources: <code>prisma.contact.upsert({ where: { email }, update: {}, create: {...} })</code>.</p>
+<p><strong>Q90. What is SQLite good for?</strong> A: Development environments, testing, embedded applications, small projects. It requires zero configuration — just a file. Not ideal for high-concurrency production workloads.</p>
+<p><strong>Q91. What is the purpose of the seed file?</strong> A: To populate the database with realistic sample data so the application can be demonstrated immediately without manual data entry.</p>
+<p><strong>Q92. How many contacts, leads, and deals are seeded?</strong> A: 8 contacts, 8 leads, 7 deals, 1 pipeline with 7 stages, and 7 activities.</p>
+<p><strong>Q93. What is a KPI?</strong> A: Key Performance Indicator — a measurable value that demonstrates how effectively objectives are being achieved. In our dashboard: total contacts, leads, MQLs, SQLs, pipeline value, conversion rate.</p>
+<p><strong>Q94. What is Recharts?</strong> A: A composable charting library built on D3. Used for our dashboard charts: LineChart (lead acquisition), PieChart (source distribution), BarChart (status distribution).</p>
+<p><strong>Q95. What is the purpose of react-hot-toast?</strong> A: Provides toast notifications for user feedback. Used for success/error messages when creating leads, simulating sources, etc.</p>
+<p><strong>Q96. What is responsive design?</strong> A: Designing web pages that adapt to different screen sizes. In our app: sidebar collapses, grids reflow from 4 columns to 1, tables become scrollable.</p>
+<p><strong>Q97. What are webhooks?</strong> A: HTTP callbacks triggered by events. Not implemented, but would be used for real lead source integrations (e.g., Google Ads webhook fires when someone submits a form).</p>
+<p><strong>Q98. What is the difference between SQL and NoSQL?</strong> A: SQL databases (like SQLite) use structured tables with predefined schemas and relationships. NoSQL databases (like MongoDB) use flexible, document-based storage. We chose SQL for its relational nature (contacts → leads → deals).</p>
+<p><strong>Q99. What is an API client?</strong> A: A centralized module (<code>src/services/api.js</code>) that wraps all API calls. It handles base URL, JSON serialization, and error formatting. Components import from this file rather than making raw fetch calls.</p>
+<p><strong>Q100. What would you improve if you had more time?</strong> A: Authentication, drag-and-drop pipeline, email integration, pagination, testing suite, better error boundaries, mobile optimization, dark mode, real-time updates with WebSockets.</p>
+<p><strong>Q101. Is Nexus CRM production-ready?</strong> A: No. It lacks authentication, proper error boundaries, comprehensive testing, pagination, and production-grade infrastructure. It's a solid semester MVP that demonstrates full-stack development skills.</p>
+<p><strong>Q102. What did you learn from this project?</strong> A: Full React component architecture, state management with hooks, REST API design, database modeling with Prisma, responsive CSS with Tailwind, data visualization with Recharts, and end-to-end debugging.</p></section>
+
+</body>
+</html>
